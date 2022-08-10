@@ -4,6 +4,7 @@ Language Features:
  * Allow qualified access to events from other contracts.
 
 Compiler Features:
+ * Code Generator: Remove redundant overflow checks in specific for loops.
  * Commandline Interface: Add ``--ast-compact-json`` output in assembler mode.
  * Commandline Interface: Add ``--ir-ast-json`` and ``--ir-optimized-ast-json`` outputs for Solidity input, providing AST in compact JSON format for IR and optimized IR.
  * EWasm: Remove EWasm backend.
