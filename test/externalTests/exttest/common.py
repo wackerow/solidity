@@ -292,6 +292,19 @@ def prepare_node_env(test_dir: Path):
         f.write(package_json)
 
 
+def replace_version_pragmas(test_dir: Path):
+    """
+    Replace fixed-version pragmas (part of Consensys best practice).
+    Include all directories to also cover node dependencies.
+    """
+    print("Replacing fixed-version pragmas...")
+    for source in test_dir.glob("**/*.sol"):
+        content = source.read_text(encoding="utf-8")
+        content = re.sub(r"pragma solidity [^;]+;", r"pragma solidity >=0.0;", content)
+        with open(source, "w", encoding="utf-8") as f:
+            f.write(content)
+
+
 def run_test(name: str, runner: TestRunner):
     rconfig = runner.config
     if rconfig.solc.binary_type not in ("native", "solcjs"):
@@ -322,8 +335,8 @@ def run_test(name: str, runner: TestRunner):
             prepare_node_env(test_dir)
         runner.setup_environment(test_dir)
 
+        replace_version_pragmas(test_dir)
         # Configure TestRunner instance
-        # TODO: replace_version_pragmas
         runner.compiler_settings(solc_version, presets)
         for preset in rconfig.selected_presets():
             print("Running compile function...")
