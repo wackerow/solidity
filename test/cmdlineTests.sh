@@ -336,7 +336,7 @@ function test_via_ir_equivalence()
 
     for yul_file in $(find . -name "${output_file_prefix}*.yul" | sort -V); do
         asm_output_two_stage+=$(
-            msg_on_error --no-stderr "$SOLC" --strict-assembly --asm "${optimizer_flags[@]}" "$yul_file" |
+            msg_on_error --no-stderr "$SOLC" --strict-assembly --asm "${optimizer_flags[@]}" --no-optimize-yul "$yul_file" |
                 sed '/^Text representation:$/d' |
                 sed '/^=======/d'
         )
@@ -354,7 +354,7 @@ function test_via_ir_equivalence()
 
     for yul_file in $(find . -name "${output_file_prefix}*.yul" | sort -V); do
         bin_output_two_stage+=$(
-            msg_on_error --no-stderr "$SOLC" --strict-assembly --bin "${optimizer_flags[@]}" "$yul_file" |
+            msg_on_error --no-stderr "$SOLC" --strict-assembly --bin "${optimizer_flags[@]}" --no-optimize-yul "$yul_file" |
                 sed '/^Binary representation:$/d' |
                 sed '/^=======/d'
         )
