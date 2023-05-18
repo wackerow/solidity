@@ -58,8 +58,13 @@ public:
 	using Homonyms = std::vector<std::pair<langutil::SourceLocation const*, std::vector<Declaration const*>>>;
 
 	DeclarationContainer() = default;
-	explicit DeclarationContainer(ASTNode const* _enclosingNode, DeclarationContainer* _enclosingContainer):
+	explicit DeclarationContainer(
+		ASTNode const* _enclosingNode,
+		ASTNode const* _selfNode,
+		DeclarationContainer* _enclosingContainer
+	):
 		m_enclosingNode(_enclosingNode),
+		m_selfNode(_selfNode),
 		m_enclosingContainer(_enclosingContainer)
 	{
 		if (_enclosingContainer)
@@ -99,12 +104,16 @@ public:
 	/// and declaration is the corresponding homonymous outer-scope declaration.
 	void populateHomonyms(std::back_insert_iterator<Homonyms> _it) const;
 
+	void setStdlibIdentifiers(std::set<std::string> const& _stdlibIdentifiers);
+
 private:
 	ASTNode const* m_enclosingNode = nullptr;
+	ASTNode const* m_selfNode = nullptr;
 	DeclarationContainer const* m_enclosingContainer = nullptr;
 	std::vector<DeclarationContainer const*> m_innerContainers;
 	std::map<ASTString, std::vector<Declaration const*>> m_declarations;
 	std::map<ASTString, std::vector<Declaration const*>> m_invisibleDeclarations;
+	std::set<std::string> const* m_stdlibIdentifiers = nullptr;
 	/// List of declarations (name and location) to check later for homonymity.
 	std::vector<std::pair<std::string, langutil::SourceLocation const*>> m_homonymCandidates;
 };

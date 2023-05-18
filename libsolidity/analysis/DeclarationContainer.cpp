@@ -150,6 +150,13 @@ vector<Declaration const*> DeclarationContainer::resolveName(
 	solAssert(!_name.empty(), "Attempt to resolve empty name.");
 	vector<Declaration const*> result;
 
+	if (auto&& sourceUnit = dynamic_cast<SourceUnit const*>(m_selfNode))
+		if (sourceUnit->experimentalSolidity() && m_stdlibIdentifiers && m_stdlibIdentifiers->count(_name))
+		{
+			solAssert(!m_enclosingContainer);
+			return result;
+		}
+
 	if (m_declarations.count(_name))
 	{
 		if (_settings.onlyVisibleAsUnqualifiedNames)
@@ -214,4 +221,9 @@ void DeclarationContainer::populateHomonyms(back_insert_iterator<Homonyms> _it) 
 		if (!declarations.empty())
 			_it = make_pair(location, declarations);
 	}
+}
+
+void DeclarationContainer::setStdlibIdentifiers(std::set<std::string> const& _stdlibIdentifiers)
+{
+	m_stdlibIdentifiers = &_stdlibIdentifiers;
 }

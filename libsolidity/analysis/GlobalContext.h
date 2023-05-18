@@ -26,6 +26,7 @@
 #include <libsolidity/ast/ASTForward.h>
 #include <map>
 #include <memory>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -55,6 +56,8 @@ public:
 
 	/// @returns a vector of all implicit global declarations excluding "this".
 	std::vector<Declaration const*> declarations() const;
+
+	static std::set<std::string> const& stdlibIdentifiers();
 
 private:
 	std::vector<std::shared_ptr<MagicVariableDeclaration const>> m_magicVariables;
