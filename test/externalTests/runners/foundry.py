@@ -44,7 +44,7 @@ def run_forge_command(command: str, env: Optional[dict] = None):
 class FoundryRunner(TestRunner):
     """Configure and run Foundry-based projects"""
 
-    profile_tmpl = Template(dedent(
+    profile_template = Template(dedent(
         """\
         [profile.${name}]
         gas_reports = [\"*\"]
@@ -118,7 +118,7 @@ class FoundryRunner(TestRunner):
             name = self.profile_name(preset)
             settings = settings_from_preset(preset, self.config.evm_version)
             profiles.append(
-                self.profile_tmpl.substitute(
+                self.profile_template.substitute(
                     name=name,
                     solc=binary_path,
                     evm_version=self.config.evm_version,
