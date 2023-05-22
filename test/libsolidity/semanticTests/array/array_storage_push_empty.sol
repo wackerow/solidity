@@ -12,13 +12,13 @@ contract C {
 // EVMVersion: >=petersburg
 // ----
 // pushEmpty(uint256): 128
-// gas irOptimized: 406413
+// gas irOptimized: 403341
 // gas legacy: 415744
-// gas legacyOptimized: 397380
+// gas legacyOptimized: 388804
 // pushEmpty(uint256): 256
-// gas irOptimized: 693185
+// gas irOptimized: 687041
 // gas legacy: 715316
-// gas legacyOptimized: 688632
+// gas legacyOptimized: 671480
 // pushEmpty(uint256): 38869 -> FAILURE # out-of-gas #
 // gas irOptimized: 100000000
 // gas legacy: 100000000
