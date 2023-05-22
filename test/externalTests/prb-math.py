@@ -38,6 +38,8 @@ if __name__ == "__main__":
             build_dependency="rust",
             compile_only_presets=[],
             settings_presets=[
+                #"ir-no-optimize",           # Compilation fails with "YulException: Variable var_y_1960 is 8 slot(s) too deep inside the stack."
+                #"ir-optimize-evm-only",     # Compilation fails with "YulException: Variable var_y_1960 is 8 slot(s) too deep inside the stack."
                 "ir-optimize-evm+yul",
                 "legacy-optimize-evm-only",
                 "legacy-optimize-evm+yul",
