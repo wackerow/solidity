@@ -47,8 +47,8 @@ if __name__ == "__main__":
             ],
             evm_version=f"{CURRENT_EVM_VERSION}",
             solc={
-                "binary_type": f"{args.solc_binary_type}",
-                "binary_path": f"{args.solc_binary_path}",
+                "binary_type": args.solc_binary_type,
+                "binary_path": args.solc_binary_path,
                 "branch": "master",
                 "install_dir": "solc/",
             },
