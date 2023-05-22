@@ -139,8 +139,9 @@ def compiler_settings(evm_version, via_ir="false", optimizer="false", yul="false
 def settings_from_preset(preset: str, evm_version: str) -> dict:
     if preset not in AVAILABLE_PRESETS:
         raise InvalidConfigError(
-            f"""Preset \"{preset}\" not found.
-            \nPlease select one or more of the available presets: {' '.join(map(str, AVAILABLE_PRESETS))}\n"""
+            f"Preset \"{preset}\" not found.\n"
+            "Please select one or more of the available presets: " +
+            ' '.join(map(str, AVAILABLE_PRESETS)) + "\n"
         )
     switch = {
         "legacy-no-optimize": compiler_settings(evm_version),

@@ -44,8 +44,8 @@ def run_forge_command(command: str, env: Optional[dict] = None):
 class FoundryRunner(TestRunner):
     """Configure and run Foundry-based projects"""
 
-    profile_tmpl = Template(
-        """
+    profile_tmpl = Template(dedent(
+        """\
         [profile.${name}]
         gas_reports = [\"*\"]
         auto_detect_solc = false
@@ -56,8 +56,8 @@ class FoundryRunner(TestRunner):
 
         [profile.${name}.optimizer_details]
         yul = ${yul}
-    """
-    )
+        """
+    ))
     foundry_config_file = "foundry.toml"
 
     def __init__(self, config: TestConfig, setup_fn=None, compile_fn=None, test_fn=None):
@@ -96,18 +96,16 @@ class FoundryRunner(TestRunner):
 
         binary_type = self.config.solc.binary_type
         binary_path = self.config.solc.binary_path
-        print(
-            dedent(
-                f"""
+        print(dedent(
+            f"""\
             Configuring Forge profiles...
             -------------------------------------
             Config file: {self.foundry_config_file}
             Binary type: {binary_type}
             Compiler path: {binary_path}
             -------------------------------------
-        """
-            )
-        )
+            """
+        ))
 
         # TODO: Add support to solcjs. Currently only native solc is supported. # pylint: disable=fixme
         if binary_type == "solcjs":
@@ -146,9 +144,8 @@ class FoundryRunner(TestRunner):
 
         solc_short_version = get_solc_short_version(solc_version)
         settings = settings_from_preset(preset, self.config.evm_version)
-        print(
-            dedent(
-                f"""
+        print(dedent(
+            f"""\
             Using Forge profile...
             -------------------------------------
             Settings preset: {preset}
@@ -157,9 +154,8 @@ class FoundryRunner(TestRunner):
             Compiler version: {solc_short_version}
             Compiler version (full): {solc_version}
             -------------------------------------
-        """
-            )
-        )
+            """
+        ))
         name = self.profile_name(preset)
         # Set the Foundry profile environment variable
         self.env.update({"FOUNDRY_PROFILE": name})
