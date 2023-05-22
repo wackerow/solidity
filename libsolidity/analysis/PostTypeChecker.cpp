@@ -462,13 +462,14 @@ struct SimpleCounterForLoopChecker: public PostTypeChecker::Checker
 	bool isSimpleCounterLoop(ForStatement const& _forStatement) const
 	{
 		auto const* cond = dynamic_cast<BinaryOperation const*>(_forStatement.condition());
-		if (!cond || cond->getOperator() != Token::LessThan)
+		if (!cond || cond->getOperator() != Token::LessThan || cond->userDefinedFunctionType())
 			return false;
 		if (!_forStatement.loopExpression())
 			return false;
 
 		auto const* post = dynamic_cast<UnaryOperation const*>(&_forStatement.loopExpression()->expression());
-		if (!post || post->getOperator() != Token::Inc)
+		// This matches both operators ++i and i++
+		if (!post || post->getOperator() != Token::Inc || post->userDefinedFunctionType())
 			return false;
 
 		auto const* lhsIdentifier = dynamic_cast<Identifier const*>(&cond->leftExpression());

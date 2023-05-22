@@ -1248,7 +1248,10 @@ bool ContractCompiler::visit(ForStatement const& _forStatement)
 	if (_forStatement.loopExpression())
 	{
 		Arithmetic previousArithmetic = m_context.arithmetic();
-		if (*_forStatement.annotation().isSimpleCounterLoop)
+		if (
+			*_forStatement.annotation().isSimpleCounterLoop &&
+			m_optimiserSettings == OptimiserSettings::standard()
+		)
 			m_context.setArithmetic(Arithmetic::Wrapping);
 		_forStatement.loopExpression()->accept(*this);
 		m_context.setArithmetic(previousArithmetic);
