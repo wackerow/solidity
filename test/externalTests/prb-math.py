@@ -56,12 +56,7 @@ if __name__ == "__main__":
 
         run_test(
             "PRBMath",
-            FoundryRunner(
-                config=runner_config,
-                setup_fn=None,
-                compile_fn=None,
-                test_fn=None,
-            ),
+            FoundryRunner(config=runner_config, setup_fn=None, compile_fn=None, test_fn=None),
         )
 
     except InvalidConfigError as exception:

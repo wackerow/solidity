@@ -60,9 +60,7 @@ class FoundryRunner(TestRunner):
     )
     foundry_config_file = "foundry.toml"
 
-    def __init__(
-        self, config: TestConfig, setup_fn=None, compile_fn=None, test_fn=None
-    ):
+    def __init__(self, config: TestConfig, setup_fn=None, compile_fn=None, test_fn=None):
         self.config = config
         self.setup_fn = setup_fn
         self.compile_fn = compile_fn
@@ -93,9 +91,7 @@ class FoundryRunner(TestRunner):
         run_forge_command("forge clean")
 
     @TestRunner.on_local_test_dir
-    def compiler_settings(
-        self, solc_version: str, presets: Tuple[str] = AVAILABLE_PRESETS
-    ):
+    def compiler_settings(self, solc_version: str, presets: Tuple[str] = AVAILABLE_PRESETS):
         """Configure forge tests profiles"""
 
         binary_type = self.config.solc.binary_type

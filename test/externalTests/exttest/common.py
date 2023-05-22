@@ -115,9 +115,7 @@ class TestRunner(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def compiler_settings(
-        self, solc_version: str, presets: Tuple[str] = AVAILABLE_PRESETS
-    ):
+    def compiler_settings(self, solc_version: str, presets: Tuple[str] = AVAILABLE_PRESETS):
         pass
 
     @abstractmethod
@@ -130,9 +128,7 @@ class TestRunner(metaclass=ABCMeta):
 
 
 # Helper functions
-def compiler_settings(
-    evm_version, via_ir="false", optimizer="false", yul="false"
-) -> dict:
+def compiler_settings(evm_version, via_ir="false", optimizer="false", yul="false") -> dict:
     return {
         "optimizer": {"enabled": optimizer, "details": {"yul": yul}},
         "evmVersion": evm_version,
@@ -150,15 +146,10 @@ def settings_from_preset(preset: str, evm_version: str) -> dict:
         "legacy-no-optimize": compiler_settings(evm_version),
         "ir-no-optimize": compiler_settings(evm_version, via_ir="true"),
         "legacy-optimize-evm-only": compiler_settings(evm_version, optimizer="true"),
-        "ir-optimize-evm-only": compiler_settings(
-            evm_version, via_ir="true", optimizer="true"
-        ),
-        "legacy-optimize-evm+yul": compiler_settings(
-            evm_version, optimizer="true", yul="true"
-        ),
-        "ir-optimize-evm+yul": compiler_settings(
-            evm_version, via_ir="true", optimizer="true", yul="true"
-        ),
+        "ir-optimize-evm-only": compiler_settings(evm_version, via_ir="true", optimizer="true"),
+        "legacy-optimize-evm+yul": compiler_settings(evm_version, optimizer="true", yul="true"),
+        "ir-optimize-evm+yul":
+            compiler_settings(evm_version, via_ir="true", optimizer="true", yul="true"),
     }
     assert preset in switch
     return switch[preset]
@@ -182,9 +173,7 @@ def parse_command_line(description: str, args: str):
     return arg_parser.parse_args(args)
 
 
-def download_project(
-    test_dir: Path, repo_url: str, ref_type: str = "branch", ref: str = "master"
-):
+def download_project(test_dir: Path, repo_url: str, ref_type: str = "branch", ref: str = "master"):
     if ref_type not in ("commit", "branch", "tag"):
         raise InvalidConfigError(f"Invalid git reference type: {ref_type}")
 
@@ -219,9 +208,7 @@ def parse_solc_version(solc_version_string):
 def get_solc_short_version(solc_full_version):
     solc_short_version_match = re.search(SOLC_SHORT_VERSION_REGEX, solc_full_version)
     if solc_short_version_match is None:
-        raise RuntimeError(
-            f"Error extracting short version string from: {solc_full_version}."
-        )
+        raise RuntimeError(f"Error extracting short version string from: {solc_full_version}.")
     return solc_short_version_match.group(1)
 
 
@@ -283,12 +270,8 @@ def prepare_node_env(test_dir: Path):
     if not package_json_path.exists():
         raise FileNotFoundError("package.json not found.")
     package_json = package_json_path.read_text(encoding="utf-8")
-    package_json = re.sub(
-        r'("prepublish":)\s".+"', lambda m: f'{m.group(1)} ""', package_json
-    )
-    package_json = re.sub(
-        r'("prepare":)\s".+"', lambda m: f'{m.group(1)} ""', package_json
-    )
+    package_json = re.sub(r'("prepublish":)\s".+"', lambda m: f'{m.group(1)} ""', package_json)
+    package_json = re.sub(r'("prepare":)\s".+"', lambda m: f'{m.group(1)} ""', package_json)
     with open(package_json_path, "w", encoding="utf-8") as f:
         f.write(package_json)
 
