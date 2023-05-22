@@ -30,7 +30,7 @@ from shutil import which, copyfile, copytree, rmtree
 from argparse import ArgumentParser
 
 from dataclasses import dataclass, field
-from typing import Dict, Optional, Tuple
+from typing import Optional, Tuple
 
 import re
 from abc import ABCMeta, abstractmethod
@@ -132,7 +132,7 @@ class TestRunner(metaclass=ABCMeta):
 # Helper functions
 def compiler_settings(
     evm_version, via_ir="false", optimizer="false", yul="false"
-) -> Dict:
+) -> dict:
     return {
         "optimizer": {"enabled": optimizer, "details": {"yul": yul}},
         "evmVersion": evm_version,
@@ -140,7 +140,7 @@ def compiler_settings(
     }
 
 
-def settings_from_preset(preset, evm_version) -> Dict:
+def settings_from_preset(preset: str, evm_version: str) -> dict:
     if preset not in AVAILABLE_PRESETS:
         raise InvalidConfigError(
             f"""Preset \"{preset}\" not found.
@@ -160,7 +160,8 @@ def settings_from_preset(preset, evm_version) -> Dict:
             evm_version, via_ir="true", optimizer="true", yul="true"
         ),
     }
-    return switch.get(preset)
+    assert preset in switch
+    return switch[preset]
 
 
 def parse_command_line(description: str, args: str):
@@ -224,7 +225,7 @@ def get_solc_short_version(solc_full_version):
     )
 
 
-def setup_solc(config: TestConfig, test_dir: Path) -> (str, str):
+def setup_solc(config: TestConfig, test_dir: Path) -> Tuple[str, str]:
     sc_config = config.solc
 
     if sc_config.binary_type == "solcjs":

@@ -25,7 +25,7 @@ import subprocess
 from pathlib import Path
 from shutil import which
 from string import Template
-from typing import Tuple
+from typing import Optional, Tuple
 from textwrap import dedent
 
 from exttest.common import AVAILABLE_PRESETS
@@ -33,7 +33,7 @@ from exttest.common import settings_from_preset, get_solc_short_version
 from exttest.common import TestConfig, TestRunner
 
 
-def run_forge_command(command: str, env: dict = None):
+def run_forge_command(command: str, env: Optional[dict] = None):
     subprocess.run(
         command.split(),
         env=env if env is not None else os.environ.copy(),
@@ -69,7 +69,7 @@ class FoundryRunner(TestRunner):
         self.test_fn = test_fn
         self.env = os.environ.copy()
         # Note: the test_dir will be set on setup_environment
-        self.test_dir: Path = None
+        self.test_dir: Optional[Path] = None
 
     def setup_environment(self, test_dir: Path):
         """Configure the project build environment"""
