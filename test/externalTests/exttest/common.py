@@ -98,10 +98,10 @@ class TestRunner(metaclass=ABCMeta):
         """Run function inside the test directory"""
 
         def f(self, *args, **kwargs):
-            if self.test_dir:
-                os.chdir(self.test_dir)
-            else:
+            if self.test_dir is None:
                 raise InvalidConfigError("Test directory not defined")
+
+            os.chdir(self.test_dir)
             return fn(self, *args, **kwargs)
 
         return f
@@ -211,18 +211,18 @@ def download_project(
 
 def parse_solc_version(solc_version_string):
     solc_version_match = re.search(SOLC_FULL_VERSION_REGEX, solc_version_string)
-    if solc_version_match:
-        return solc_version_match.group(1)
-    raise RuntimeError(f"Solc version could not be found in: {solc_version_string}.")
+    if solc_version_match is None:
+        raise RuntimeError(f"Solc version could not be found in: {solc_version_string}.")
+    return solc_version_match.group(1)
 
 
 def get_solc_short_version(solc_full_version):
     solc_short_version_match = re.search(SOLC_SHORT_VERSION_REGEX, solc_full_version)
-    if solc_short_version_match:
-        return solc_short_version_match.group(1)
-    raise RuntimeError(
-        f"Error extracting short version string from: {solc_full_version}."
-    )
+    if solc_short_version_match is None:
+        raise RuntimeError(
+            f"Error extracting short version string from: {solc_full_version}."
+        )
+    return solc_short_version_match.group(1)
 
 
 def setup_solc(config: TestConfig, test_dir: Path) -> Tuple[str, str]:
