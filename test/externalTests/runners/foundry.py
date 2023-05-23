@@ -60,7 +60,7 @@ class FoundryRunner(TestRunner):
     foundry_config_file = "foundry.toml"
 
     def __init__(self, config: TestConfig, setup_fn=None, compile_fn=None, test_fn=None):
-        self.config = config
+        super().__init__(config)
         self.setup_fn = setup_fn
         self.compile_fn = compile_fn
         self.test_fn = test_fn

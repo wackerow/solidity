@@ -89,6 +89,11 @@ class WrongBinaryType(Exception):
 
 
 class TestRunner(metaclass=ABCMeta):
+    config: TestConfig
+
+    def __init__(self, config: TestConfig):
+        self.config = config
+
     @staticmethod
     def on_local_test_dir(fn):
         """Run a function inside the test directory"""
@@ -210,40 +215,38 @@ def get_solc_short_version(solc_full_version) -> str:
 
 
 def setup_solc(config: TestConfig, test_dir: Path) -> str:
-    sc_config = config.solc
-
-    if sc_config.binary_type == "solcjs":
-        solc_dir = test_dir.parent / sc_config.install_dir
+    if config.solc.binary_type == "solcjs":
+        solc_dir = test_dir.parent / config.solc.install_dir
         solc_bin = solc_dir / "dist/solc.js"
 
         print("Setting up solc-js...")
-        if sc_config.solcjs_src_dir == "":
+        if config.solc.solcjs_src_dir == "":
             download_project(
                 solc_dir,
                 "https://github.com/ethereum/solc-js.git",
                 "branch",
-                sc_config.branch,
+                config.solc.branch,
             )
         else:
-            print(f"Using local solc-js from {sc_config.solcjs_src_dir}...")
-            copytree(sc_config.solcjs_src_dir, solc_dir)
+            print(f"Using local solc-js from {config.solc.solcjs_src_dir}...")
+            copytree(config.solc.solcjs_src_dir, solc_dir)
             rmtree(solc_dir / "dist")
             rmtree(solc_dir / "node_modules")
         os.chdir(solc_dir)
         subprocess.run(["npm", "install"], check=True)
         subprocess.run(["npm", "run", "build"], check=True)
 
-        if mimetypes.guess_type(sc_config.binary_path)[0] != "application/javascript":
+        if mimetypes.guess_type(config.solc.binary_path)[0] != "application/javascript":
             raise WrongBinaryType(
                 "Provided soljson.js is expected to be of the type application/javascript but it is not."
             )
 
-        copyfile(sc_config.binary_path, solc_dir / "dist/soljson.js")
+        copyfile(config.solc.binary_path, solc_dir / "dist/soljson.js")
         solc_version_output = subprocess.getoutput(f"node {solc_bin} --version")
     else:
         print("Setting up solc...")
         solc_version_output = subprocess.getoutput(
-            f"{sc_config.binary_path} --version"
+            f"{config.solc.binary_path} --version"
         ).split(":")[1]
 
     return parse_solc_version(solc_version_output)
@@ -287,44 +290,43 @@ def replace_version_pragmas(test_dir: Path):
 
 
 def run_test(name: str, runner: TestRunner):
-    rconfig = runner.config
-    if rconfig.solc.binary_type not in ("native", "solcjs"):
+    if runner.config.solc.binary_type not in ("native", "solcjs"):
         raise InvalidConfigError(
-            f"Invalid solidity compiler binary type: {rconfig.solc.binary_type}"
+            f"Invalid solidity compiler binary type: {runner.config.solc.binary_type}"
         )
-    if rconfig.solc.binary_type != "solcjs" and rconfig.solc.solcjs_src_dir != "":
+    if runner.config.solc.binary_type != "solcjs" and runner.config.solc.solcjs_src_dir != "":
         raise InvalidConfigError(
             f"""Invalid test configuration: 'native' mode cannot be used with 'solcjs_src_dir'.
-            Please use 'binary_type: solcjs' or unset: 'solcjs_src_dir: {rconfig.solc.solcjs_src_dir}'"""
+            Please use 'binary_type: solcjs' or unset: 'solcjs_src_dir: {runner.config.solc.solcjs_src_dir}'"""
         )
 
     print(f"Testing {name}...\n===========================")
     with TemporaryDirectory(prefix=f"ext-test-{name}-") as tmp_dir:
         test_dir = Path(tmp_dir) / "ext"
-        presets = rconfig.selected_presets()
+        presets = runner.config.selected_presets()
         print(f"Selected settings presets: {' '.join(map(str, presets))}")
 
         # Configure solc compiler
-        solc_version = setup_solc(rconfig, test_dir)
+        solc_version = setup_solc(runner.config, test_dir)
         print(f"Using compiler version {solc_version}")
 
         # Download project
-        download_project(test_dir, rconfig.repo_url, rconfig.ref_type, rconfig.ref)
+        download_project(test_dir, runner.config.repo_url, runner.config.ref_type, runner.config.ref)
 
         # Configure run environment
-        if rconfig.build_dependency == "nodejs":
+        if runner.config.build_dependency == "nodejs":
             prepare_node_env(test_dir)
         runner.setup_environment(test_dir)
 
         replace_version_pragmas(test_dir)
         # Configure TestRunner instance
         runner.compiler_settings(solc_version, presets)
-        for preset in rconfig.selected_presets():
+        for preset in runner.config.selected_presets():
             print("Running compile function...")
             runner.compile(solc_version, preset)
             if (
                 os.environ.get("COMPILE_ONLY") == "1"
-                or preset in rconfig.compile_only_presets
+                or preset in runner.config.compile_only_presets
             ):
                 print("Skipping test function...")
             else:
