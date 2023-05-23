@@ -92,6 +92,15 @@ class TestRunner(metaclass=ABCMeta):
     config: TestConfig
 
     def __init__(self, config: TestConfig):
+        if config.solc.binary_type not in ("native", "solcjs"):
+            raise InvalidConfigError(
+                f"Invalid solidity compiler binary type: {config.solc.binary_type}"
+            )
+        if config.solc.binary_type != "solcjs" and config.solc.solcjs_src_dir != "":
+            raise InvalidConfigError(
+                f"""Invalid test configuration: 'native' mode cannot be used with 'solcjs_src_dir'.
+                Please use 'binary_type: solcjs' or unset: 'solcjs_src_dir: {config.solc.solcjs_src_dir}'"""
+            )
         self.config = config
 
     @staticmethod
@@ -290,16 +299,6 @@ def replace_version_pragmas(test_dir: Path):
 
 
 def run_test(name: str, runner: TestRunner):
-    if runner.config.solc.binary_type not in ("native", "solcjs"):
-        raise InvalidConfigError(
-            f"Invalid solidity compiler binary type: {runner.config.solc.binary_type}"
-        )
-    if runner.config.solc.binary_type != "solcjs" and runner.config.solc.solcjs_src_dir != "":
-        raise InvalidConfigError(
-            f"""Invalid test configuration: 'native' mode cannot be used with 'solcjs_src_dir'.
-            Please use 'binary_type: solcjs' or unset: 'solcjs_src_dir: {runner.config.solc.solcjs_src_dir}'"""
-        )
-
     print(f"Testing {name}...\n===========================")
     with TemporaryDirectory(prefix=f"ext-test-{name}-") as tmp_dir:
         test_dir = Path(tmp_dir) / "ext"
