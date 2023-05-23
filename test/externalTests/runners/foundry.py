@@ -24,7 +24,6 @@ import re
 import subprocess
 from pathlib import Path
 from shutil import which
-from string import Template
 from typing import Optional, List
 from textwrap import dedent
 
@@ -42,21 +41,6 @@ def run_forge_command(command: str, env: Optional[dict] = None):
 
 class FoundryRunner(TestRunner):
     """Configure and run Foundry-based projects"""
-
-    profile_template = Template(dedent(
-        """\
-        [profile.${name}]
-        gas_reports = [\"*\"]
-        auto_detect_solc = false
-        solc = \"${solc}\"
-        evm_version = \"${evm_version}\"
-        optimizer = ${optimizer}
-        via_ir = ${via_ir}
-
-        [profile.${name}.optimizer_details]
-        yul = ${yul}
-        """
-    ))
     foundry_config_file = "foundry.toml"
 
     def __init__(self, config: TestConfig, setup_fn=None, compile_fn=None, test_fn=None):
@@ -83,6 +67,30 @@ class FoundryRunner(TestRunner):
         """Returns foundry profile name"""
         # Replace - or + by underscore to avoid invalid toml syntax
         return re.sub(r"(\-|\+)+", "_", preset)
+
+    @staticmethod
+    def profile_section(profile_fields: dict) -> str:
+        return dedent(
+            """\
+            [profile.{name}]
+            gas_reports = ["*"]
+            auto_detect_solc = false
+            solc = "{solc}"
+            evm_version = "{evm_version}"
+            optimizer = {optimizer}
+            via_ir = {via_ir}
+
+            [profile.{name}.optimizer_details]
+            yul = {yul}
+            """
+        ).format(
+            name=profile_fields["name"],
+            solc=profile_fields["solc"],
+            evm_version=profile_fields["evm_version"],
+            optimizer=profile_fields["optimizer"],
+            via_ir=profile_fields["via_ir"],
+            yul=profile_fields["yul"]
+        )
 
     @TestRunner.on_local_test_dir
     def clean(self):
@@ -117,14 +125,14 @@ class FoundryRunner(TestRunner):
             name = self.profile_name(preset)
             settings = settings_from_preset(preset, self.config.evm_version)
             profiles.append(
-                self.profile_template.substitute(
-                    name=name,
-                    solc=binary_path,
-                    evm_version=self.config.evm_version,
-                    optimizer=settings["optimizer"]["enabled"],
-                    via_ir=settings["viaIR"],
-                    yul=settings["optimizer"]["details"]["yul"],
-                )
+                self.profile_section({
+                    "name": name,
+                    "solc": binary_path,
+                    "evm_version": self.config.evm_version,
+                    "optimizer": settings["optimizer"]["enabled"],
+                    "via_ir": settings["viaIR"],
+                    "yul": settings["optimizer"]["details"]["yul"]
+                })
             )
 
         with open(
