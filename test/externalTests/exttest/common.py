@@ -30,7 +30,7 @@ from shutil import which, copyfile, copytree, rmtree
 from argparse import ArgumentParser
 
 from dataclasses import dataclass, field
-from typing import Optional, Tuple
+from typing import List
 
 import re
 from abc import ABCMeta, abstractmethod
@@ -46,23 +46,23 @@ SOLC_FULL_VERSION_REGEX = re.compile(r"^[a-zA-Z: ]*(.*)$")
 SOLC_SHORT_VERSION_REGEX = re.compile(r"^([0-9.]+).*\+|\-$")
 
 CURRENT_EVM_VERSION: str = "london"
-AVAILABLE_PRESETS: Tuple[str] = (
+AVAILABLE_PRESETS: List[str] = [
     "legacy-no-optimize",
     "ir-no-optimize",
     "legacy-optimize-evm-only",
     "ir-optimize-evm-only",
     "legacy-optimize-evm+yul",
     "ir-optimize-evm+yul",
-)
+]
 
 
 @dataclass
 class SolcConfig:
     binary_type: str = field(default="native")
     binary_path: str = field(default="/usr/local/bin/solc")
-    branch: Optional[str] = field(default="master")
-    install_dir: Optional[str] = field(default="solc")
-    solcjs_src_dir: Optional[str] = field(default="")
+    branch: str = field(default="master")
+    install_dir: str = field(default="solc")
+    solcjs_src_dir: str = field(default="")
 
 
 @dataclass
@@ -70,15 +70,11 @@ class TestConfig:
     repo_url: str
     ref_type: str
     ref: str
-    build_dependency: Optional[str] = field(default="nodejs")
-    compile_only_presets: Optional[Tuple[str]] = field(default_factory=tuple)
-    settings_presets: Optional[Tuple[str]] = field(default=AVAILABLE_PRESETS)
-    evm_version: Optional[str] = field(default=CURRENT_EVM_VERSION)
-    solc: Optional[SolcConfig] = field(default_factory=SolcConfig)
-
-    def __post_init__(self):
-        if isinstance(self.solc, dict):
-            self.solc = SolcConfig(**self.solc)
+    build_dependency: str = field(default="nodejs")
+    compile_only_presets: List[str] = field(default_factory=list)
+    settings_presets: List[str] = field(default_factory=lambda: AVAILABLE_PRESETS)
+    evm_version: str = field(default=CURRENT_EVM_VERSION)
+    solc: SolcConfig = field(default_factory=SolcConfig)
 
     def selected_presets(self):
         return set(self.compile_only_presets + self.settings_presets)
@@ -95,7 +91,7 @@ class WrongBinaryType(Exception):
 class TestRunner(metaclass=ABCMeta):
     @staticmethod
     def on_local_test_dir(fn):
-        """Run function inside the test directory"""
+        """Run a function inside the test directory"""
 
         def f(self, *args, **kwargs):
             if self.test_dir is None:
@@ -115,7 +111,7 @@ class TestRunner(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def compiler_settings(self, solc_version: str, presets: Tuple[str] = AVAILABLE_PRESETS):
+    def compiler_settings(self, solc_version: str, presets: List[str]):
         pass
 
     @abstractmethod
@@ -139,9 +135,9 @@ def compiler_settings(evm_version, via_ir="false", optimizer="false", yul="false
 def settings_from_preset(preset: str, evm_version: str) -> dict:
     if preset not in AVAILABLE_PRESETS:
         raise InvalidConfigError(
-            f"Preset \"{preset}\" not found.\n"
+            f'Preset "{preset}" not found.\n'
             "Please select one or more of the available presets: " +
-            ' '.join(map(str, AVAILABLE_PRESETS)) + "\n"
+            " ".join(AVAILABLE_PRESETS) + "\n"
         )
     switch = {
         "legacy-no-optimize": compiler_settings(evm_version),
@@ -156,7 +152,7 @@ def settings_from_preset(preset: str, evm_version: str) -> dict:
     return switch[preset]
 
 
-def parse_command_line(description: str, args: str):
+def parse_command_line(description: str, args: List[str]):
     arg_parser = ArgumentParser(description)
     arg_parser.add_argument(
         "solc_binary_type",
@@ -199,21 +195,21 @@ def download_project(test_dir: Path, repo_url: str, ref_type: str = "branch", re
     print(f"Current commit hash: {git_commit_hash()}")
 
 
-def parse_solc_version(solc_version_string):
+def parse_solc_version(solc_version_string) -> str:
     solc_version_match = re.search(SOLC_FULL_VERSION_REGEX, solc_version_string)
     if solc_version_match is None:
         raise RuntimeError(f"Solc version could not be found in: {solc_version_string}.")
     return solc_version_match.group(1)
 
 
-def get_solc_short_version(solc_full_version):
+def get_solc_short_version(solc_full_version) -> str:
     solc_short_version_match = re.search(SOLC_SHORT_VERSION_REGEX, solc_full_version)
     if solc_short_version_match is None:
         raise RuntimeError(f"Error extracting short version string from: {solc_full_version}.")
     return solc_short_version_match.group(1)
 
 
-def setup_solc(config: TestConfig, test_dir: Path) -> Tuple[str, str]:
+def setup_solc(config: TestConfig, test_dir: Path) -> str:
     sc_config = config.solc
 
     if sc_config.binary_type == "solcjs":

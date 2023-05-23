@@ -25,10 +25,9 @@ import subprocess
 from pathlib import Path
 from shutil import which
 from string import Template
-from typing import Optional, Tuple
+from typing import Optional, List
 from textwrap import dedent
 
-from exttest.common import AVAILABLE_PRESETS
 from exttest.common import settings_from_preset, get_solc_short_version
 from exttest.common import TestConfig, TestRunner
 
@@ -67,7 +66,7 @@ class FoundryRunner(TestRunner):
         self.test_fn = test_fn
         self.env = os.environ.copy()
         # Note: the test_dir will be set on setup_environment
-        self.test_dir: Optional[Path] = None
+        self.test_dir: Path
 
     def setup_environment(self, test_dir: Path):
         """Configure the project build environment"""
@@ -91,7 +90,7 @@ class FoundryRunner(TestRunner):
         run_forge_command("forge clean")
 
     @TestRunner.on_local_test_dir
-    def compiler_settings(self, solc_version: str, presets: Tuple[str] = AVAILABLE_PRESETS):
+    def compiler_settings(self, solc_version: str, presets: List[str]):
         """Configure forge tests profiles"""
 
         binary_type = self.config.solc.binary_type
@@ -129,7 +128,7 @@ class FoundryRunner(TestRunner):
             )
 
         with open(
-            file=Path(self.test_dir) / self.foundry_config_file,
+            file=self.test_dir / self.foundry_config_file,
             mode="a",
             encoding="utf-8",
         ) as f:

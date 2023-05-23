@@ -23,7 +23,7 @@ import sys
 
 from exttest.common import CURRENT_EVM_VERSION, InvalidConfigError
 from exttest.common import parse_command_line, run_test
-from exttest.common import TestConfig
+from exttest.common import TestConfig, SolcConfig
 
 from runners.foundry import FoundryRunner
 
@@ -36,8 +36,8 @@ if __name__ == "__main__":
             ref_type="branch",
             ref="main",
             build_dependency="rust",
-            compile_only_presets=[],
             settings_presets=[
+                # pylint: disable=line-too-long
                 #"ir-no-optimize",           # Compilation fails with "YulException: Variable var_y_1960 is 8 slot(s) too deep inside the stack."
                 #"ir-optimize-evm-only",     # Compilation fails with "YulException: Variable var_y_1960 is 8 slot(s) too deep inside the stack."
                 "ir-optimize-evm+yul",
@@ -45,13 +45,13 @@ if __name__ == "__main__":
                 "legacy-optimize-evm+yul",
                 "legacy-no-optimize",
             ],
-            evm_version=f"{CURRENT_EVM_VERSION}",
-            solc={
-                "binary_type": args.solc_binary_type,
-                "binary_path": args.solc_binary_path,
-                "branch": "master",
-                "install_dir": "solc/",
-            },
+            evm_version=CURRENT_EVM_VERSION,
+            solc=SolcConfig(
+                binary_type=args.solc_binary_type,
+                binary_path=args.solc_binary_path,
+                branch="master",
+                install_dir="solc/",
+            ),
         )
 
         run_test("PRBMath", FoundryRunner(config=runner_config))
