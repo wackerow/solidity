@@ -40,7 +40,7 @@ from abc import ABCMeta, abstractmethod
 PROJECT_ROOT = Path(__file__).parents[3]
 sys.path.insert(0, f"{PROJECT_ROOT}/scripts")
 
-from common.git_helpers import git, git_commit_hash
+from common.git_helpers import run_git_command, git_commit_hash
 
 SOLC_FULL_VERSION_REGEX = re.compile(r"^[a-zA-Z: ]*(.*)$")
 SOLC_SHORT_VERSION_REGEX = re.compile(r"^([0-9.]+).*\+|\-$")
@@ -183,19 +183,19 @@ def download_project(test_dir: Path, repo_url: str, ref_type: str = "branch", re
     if ref_type == "commit":
         os.mkdir(test_dir)
         os.chdir(test_dir)
-        git("init")
-        git(f"remote add origin {repo_url}")
-        git(f"fetch --depth 1 origin {ref}")
-        git("reset --hard FETCH_HEAD")
+        run_git_command(["git", "init"])
+        run_git_command(["git", "remote", "add", "origin", repo_url])
+        run_git_command(["git", "fetch", "--depth", "1", "origin", ref])
+        run_git_command(["git", "reset", "--hard", "FETCH_HEAD"])
     else:
         os.chdir(test_dir.parent)
-        git(f"clone --depth 1 {repo_url} -b {ref} {test_dir.resolve()}")
+        run_git_command(["git", "clone", "--depth", "1", repo_url, "-b", ref, test_dir.resolve()])
         if not test_dir.exists():
             raise RuntimeError("Git clone failed.")
         os.chdir(test_dir)
 
     if (test_dir / ".gitmodules").exists():
-        git("submodule update --init")
+        run_git_command(["git", "submodule", "update", "--init"])
 
     print(f"Current commit hash: {git_commit_hash()}")
 
