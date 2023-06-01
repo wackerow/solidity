@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -eo pipefail
+set -euo pipefail
 
 # shellcheck source=scripts/common.sh
 source "${REPO_ROOT}/scripts/common.sh"
@@ -87,7 +87,7 @@ do
     if ! [[ "${requiresOptimizer[*]}" =~ $contractFile ]]
     then
         printTask "    - ${contractFile}"
-        test_via_ir_equivalence "${REPO_ROOT}/test/${contractFile}"
+        test_via_ir_equivalence "${REPO_ROOT}/test/${contractFile}" ''
     fi
 
     printTask "    - ${contractFile} (optimized)"
