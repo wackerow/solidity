@@ -370,6 +370,36 @@ function test_via_ir_equivalence()
     rm -r "$SOLTMPDIR"
 }
 
+function test_cli_and_standard_json_equivalence
+{
+    (( $# == 5 )) || assertFail
+    local cli_options="$1"
+    local selected_cli_output="$2"
+    local standard_json_settings="$3"
+    local selected_standard_json_output="$4"
+    local input_file="$5"
+
+    local cli_output standard_json_output
+    cli_output=$(
+        # shellcheck disable=SC2086 # Intentionally unquoted. May contain multiple options.
+        msg_on_error --no-stderr \
+            "$SOLC" $cli_options "$selected_cli_output" "$input_file"
+    )
+    standard_json_output=$(
+        singleContractOutputViaStandardJSON \
+            Solidity \
+            "$selected_standard_json_output" \
+            "$standard_json_settings" \
+            "$input_file"
+    )
+
+    diff_values \
+        "$(echo "$cli_output" | stripCLIDecorations | stripEmptyLines)" \
+        "$(echo "$standard_json_output" | stripEmptyLines)" \
+        --ignore-space-change \
+        --ignore-blank-lines
+}
+
 ## RUN
 
 SOLTMPDIR=$(mktemp -d)
@@ -637,6 +667,25 @@ printTask "Testing the eqivalence of --via-ir and a two-stage compilation..."
         printTask " - ${contractFile} (optimized)"
         test_via_ir_equivalence "${REPO_ROOT}/test/${contractFile}" --optimize
     done
+)
+
+printTask "Testing the eqivalence of CLI options and Standard JSON settings..."
+(
+    printTask " - --optimize vs optimizer.enabled: true (--asm output)"
+    test_cli_and_standard_json_equivalence \
+        '--optimize' \
+        '--asm' \
+        '"optimizer": {"enabled": true}' \
+        'evm.assembly' \
+        "${REPO_ROOT}/test/libsolidity/semanticTests/various/erc20.sol"
+
+    printTask " - --optimize-yul vs optimizer.details.yul: true (--asm output)"
+    test_cli_and_standard_json_equivalence \
+        '--optimize-yul' \
+        '--asm' \
+        '"optimizer": {"enabled": false, "details": {"yul": true}}' \
+        'evm.assembly' \
+        "${REPO_ROOT}/test/libsolidity/semanticTests/various/erc20.sol"
 )
 
 printTask "Testing standard input..."
