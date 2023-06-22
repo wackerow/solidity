@@ -1,39 +1,53 @@
-document.addEventListener('DOMContentLoaded', function() {
+function toggleCssMode(isLight) {
+  var root = document.querySelector(":root");
+  var mode = isLight ? "light" : "dark";
+  localStorage.setItem("color-scheme", mode);
 
-    function toggleCssMode(isDay) {
-        var mode = (isDay ? "Day" : "Night");
-        localStorage.setItem("css-mode", mode);
+  var url_root =
+    DOCUMENTATION_OPTIONS.URL_ROOT == "./"
+      ? ""
+      : DOCUMENTATION_OPTIONS.URL_ROOT;
+  var daysheet = $(`link[href="${url_root}_static/pygments.css"]`)[0].sheet;
+  daysheet.disabled = !isLight;
 
-        var url_root = DOCUMENTATION_OPTIONS.URL_ROOT == "./" ? "" : DOCUMENTATION_OPTIONS.URL_ROOT;
-        var daysheet = $(`link[href="${url_root}_static/pygments.css"]`)[0].sheet;
-        daysheet.disabled = !isDay;
+  var nightsheet = $(`link[href="${url_root}_static/css/dark.css"]`)[0];
+  if (!isLight && nightsheet === undefined) {
+    var element = document.createElement("link");
+    element.setAttribute("rel", "stylesheet");
+    element.setAttribute("type", "text/css");
+    element.setAttribute("href", `${url_root}_static/css/dark.css`);
+    document.getElementsByTagName("head")[0].appendChild(element);
+    return;
+  }
+  if (nightsheet !== undefined) {
+    nightsheet.sheet.disabled = isLight;
+  }
 
-        var nightsheet = $(`link[href="${url_root}_static/css/dark.css"]`)[0];
-        if (!isDay && nightsheet === undefined) {
-            var element = document.createElement("link");
-            element.setAttribute("rel", "stylesheet");
-            element.setAttribute("type", "text/css");
-            element.setAttribute("href", `${url_root}_static/css/dark.css`);
-            document.getElementsByTagName("head")[0].appendChild(element);
-            return;
-        }
-        if (nightsheet !== undefined) {
-            nightsheet.sheet.disabled = isDay;
-        }
-    }
+  // Update logo
+  document
+    .querySelector("img.logo")
+    .setAttribute(
+      "src",
+      isLight ? "_static/logo.svg" : "_static/img/logo-dark.svg"
+    );
+  root.setAttribute("style", `color-scheme: ${isLight ? "light" : "dark"};`);
+  if (isLight) {
+    root.classList.remove("dark-colors");
+  } else {
+    root.classList.add("dark-colors");
+  }
+}
 
-    var initial = localStorage.getItem("css-mode") != "Night";
-    var checkbox = document.querySelector('input[name=mode]');
+function initialize() {
+  var prefersLight = localStorage.getItem("color-scheme") != "dark";
+  var checkbox = document.querySelector("input[name=mode]");
 
-    toggleCssMode(initial);
-    checkbox.checked = initial;
+  toggleCssMode(prefersLight);
+  checkbox.checked = prefersLight;
 
-    checkbox.addEventListener('change', function() {
-        document.documentElement.classList.add('transition');
-        window.setTimeout(() => {
-            document.documentElement.classList.remove('transition');
-        }, 1000)
-        toggleCssMode(this.checked);
-    })
+  checkbox.addEventListener("change", function () {
+    toggleCssMode(this.checked);
+  });
+}
 
-});
+document.addEventListener("DOMContentLoaded", initialize);

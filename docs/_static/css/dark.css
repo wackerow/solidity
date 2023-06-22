@@ -100,10 +100,6 @@ code.docutils.literal.notranslate {
 
 /* table of contents */
 
-.wy-nav-content-wrap {
-    background-color: rgba(0, 0, 0, 0.6) !important;
-}
-
 .sidebar {
     background-color: #191919 !important;
 }

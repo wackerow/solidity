@@ -132,7 +132,6 @@ html_theme = 'sphinx_rtd_theme'
 # documentation.
 html_theme_options = {
     'logo_only': True,
-    'style_nav_header_background': '#65afff',
     'display_version': True,
 }
 

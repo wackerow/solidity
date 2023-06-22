@@ -1,3 +1,111 @@
+/* ROOT DECLARATIONS */
+:root {
+    --color-a: #2B247C;
+    --color-b: #672AC8;
+    --color-c: #5554D9;
+    --color-d: #9F94E8;
+    --color-e: #AEC0F1;
+    --color-f: #E6E3EC;
+}
+
+.dark-colors {
+    --color-a: #E6E3EC !important;
+    --color-b: #AEC0F1 !important;
+    --color-c: #9F94E8 !important;
+    --color-d: #5554D9 !important;
+    --color-e: #672AC8 !important;
+    --color-f: #2B247C !important;
+}
+
+* {
+    transition: 'background 200ms ease-in-out';
+}
+
+/* TYPE FACES */
+@font-face {
+    font-family: 'Overpass';
+    font-style: light;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/fonts/overpass/overpass-light.otf");
+}
+@font-face {
+    font-family: 'Overpass';
+    font-style:  normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/overpass/overpass-regular.otf");
+}
+@font-face {
+    font-family: 'Overpass';
+    font-style:  medium;
+    font-weight: 500;
+    font-display: swap;
+    src: url("/fonts/overpass/overpass-semibold.otf");
+}
+@font-face {
+    font-family: 'Overpass';
+    font-style:  bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/overpass/overpass-bold.otf");
+}
+@font-face {
+    font-family: 'Overpass';
+    font-style:  italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/overpass/overpass-italic.otf");
+}
+@font-face {
+    font-family: 'Overpass Mono';
+    font-style:  regular;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/overpass-mono/overpass-mono-regular.otf");
+}
+@font-face {
+    font-family: 'Overpass Mono';
+    font-style:  bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/overpass-mono/overpass-mono-bold.otf");
+}
+
+/* HEADER STYLES */
+h1 {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 700;
+    font-size: 48px; /* 64px */
+    color: var(--color-a) !important;
+    line-height: 1.1;
+    text-wrap: balance;
+}
+h2 {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 700;
+    font-size: 44px;
+    color: var(--color-b) !important;
+    line-height: 1.1;
+    text-wrap: balance;
+}
+h3 {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 700;
+    font-size: 38px;
+    color: var(--color-b) !important;
+    line-height: 1.2;
+    text-wrap: balance;
+}
+h4 {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--color-b) !important;
+    line-height: 1.4;
+    text-wrap: balance;
+}
+
 pre {
     white-space: pre-wrap;       /* css-3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
@@ -44,11 +152,6 @@ pre {
     color: #272525;
 }
 
-/* menu section headers */
-.wy-menu p.caption {
-    color: #65afff;
-}
-
 /* Link to Remix IDE shown next to code snippets */
 .rst-content p.remix-link-container {
     display: block;
@@ -72,4 +175,28 @@ pre {
 .rst-content div.highlight-solidity,
 .rst-content div.highlight-yul {
     margin-top: 0;
+}
+
+/* CUSTOMIZATION UPDATES */
+
+.wy-nav-content-wrap, .wy-nav-content {
+    background: var(--color-f) !important;
+}
+
+.wy-side-nav-search {
+    background-color: var(--color-e) !important;
+    color: var(--color-a) !important;
+}
+
+.wy-side-nav-search svg {
+    color: var(--color-a) !important;
+}
+
+.wy-nav-top {
+    background-color: var(--color-d) !important;
+    color: var(--color-a) !important;
+}
+
+.wy-nav-content {
+    margin-inline: auto;
 }
