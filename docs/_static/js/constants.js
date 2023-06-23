@@ -3,7 +3,7 @@ const LIGHT_LOGO_PATH = "_static/img/logo.svg";
 const DARK_LOGO_PATH = "_static/img/logo-dark.svg";
 
 // SOLIDITY NAVIGATION LINKS
-const SOLIDITY_HOME_URL = "https://soliditylang.org";
+const SOLIDITY_HOME_URL = "https://solidity-website.vercel.app"; // TODO: Revert back to primary domain when ready
 const BLOG_URL = `${SOLIDITY_HOME_URL}/blog`;
 const DOCS_URL = "/";
 const USE_CASES_PATH = `${SOLIDITY_HOME_URL}/use-cases`;
