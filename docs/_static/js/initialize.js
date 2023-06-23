@@ -30,7 +30,13 @@ function buildHeader() {
     link.setAttribute("key", name);
     link.setAttribute("href", href);
     link.setAttribute("aria-label", name);
-    link.innerText = name;
+    let innerText = name;
+    if (href === FORUM_URL) {
+      innerText += " ↗";
+      link.setAttribute("target", "_blank");
+      link.setAttribute("rel", "noopener noreferrer");
+    }
+    link.innerText = innerText;
     return link;
   });
   linkElements.forEach((link) => navBar.appendChild(link));
