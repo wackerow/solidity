@@ -7,7 +7,7 @@ const SOLIDITY_HOME_URL = "https://solidity-website.vercel.app"; // TODO: Revert
 const BLOG_URL = `${SOLIDITY_HOME_URL}/blog`;
 const DOCS_URL = "/";
 const USE_CASES_PATH = `${SOLIDITY_HOME_URL}/use-cases`;
-const CONTRIBUTE_PATH = `/contributing.html`;
+const CONTRIBUTE_PATH = `/en/latest/contributing.html`;
 const ABOUT_PATH = `${SOLIDITY_HOME_URL}/about`;
 const FORUM_URL = "https://forum.soliditylang.org/";
 
