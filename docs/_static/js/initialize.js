@@ -26,7 +26,6 @@ function initialize() {
   // Enable/disable light style sheets
   lightCss.sheet.disabled = !prefersLight;
 
-  // TODO: Figure out how to pre-load this image so it doesn't lag on first toggle
   // Update logo
   document
     .querySelector("img.logo")

@@ -21,8 +21,10 @@
     transition: background 200ms ease-in-out;
 }
 
-html {
-    background: var(--color-f);
+html,
+body,
+.wy-grid-for-nav  {
+    background-color: var(--color-f);
 }
 
 /* TYPE FACES */
@@ -185,21 +187,27 @@ pre {
 /* CUSTOMIZATION UPDATES */
 
 .wy-nav-content-wrap, .wy-nav-content {
-    background: var(--color-f) !important;
+    background: transparent !important;
 }
 
 .wy-side-nav-search {
-    background-color: var(--color-e) !important;
-    color: var(--color-text) !important;
+    background-color: transparent !important;
+    color: var(--color-a) !important;
+    box-shadow: 0 4 4 0 var(--color-a);
+    border-bottom: 1px solid var(--color-a) !important;
 }
 
 .wy-side-nav-search svg {
-    color: var(--color-text) !important;
+    color: var(--color-a) !important;
 }
 
 .wy-nav-top {
-    background-color: var(--color-d) !important;
-    color: var(--color-text) !important;
+    background-color: transparent !important;
+    color: var(--color-a) !important;
+}
+
+.wy-nav-top a {
+    color: var(--color-a) !important;
 }
 
 .wy-nav-content {
