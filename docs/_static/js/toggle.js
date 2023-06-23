@@ -4,8 +4,6 @@ function toggleCssMode() {
       ? ""
       : DOCUMENTATION_OPTIONS.URL_ROOT;
 
-  const [DARK, LIGHT] = ["dark", "light"];
-
   // Check localStorage for previous color scheme preference, assign the opposite
   var newMode = localStorage.getItem("color-scheme") == DARK ? LIGHT : DARK;
 
@@ -25,9 +23,6 @@ function toggleCssMode() {
 
   // Update logo
   document
-    .querySelector("img.logo")
-    .setAttribute(
-      "src",
-      newMode === LIGHT ? "_static/logo.svg" : "_static/img/logo-dark.svg"
-    );
+    .querySelector("img.solidity-logo")
+    .setAttribute("src", newMode === LIGHT ? LIGHT_LOGO_PATH : DARK_LOGO_PATH);
 }

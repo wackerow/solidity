@@ -1,11 +1,16 @@
 /* ROOT DECLARATIONS */
 :root {
-    --color-a: #2B247C;
+    --color-a: #2B247C; /* Text */
     --color-b: #672AC8;
     --color-c: #5554D9;
     --color-d: #9F94E8;
     --color-e: #AEC0F1;
-    --color-f: #E6E3EC;
+    --color-f: #E6E3EC; /* Background */
+
+    --color-mode: white;
+    --color-anti-mode: black;
+    --menu-bg: #2B247C08;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 :root[style*=dark] {
@@ -15,6 +20,10 @@
     --color-d: #5554D9 !important;
     --color-e: #672AC8 !important;
     --color-f: #2B247C !important;
+
+    --color-mode: black !important;
+    --color-anti-mode: white !important;
+    --menu-bg: #E6E3EC08 !important;
 } 
 
 * {
@@ -24,7 +33,17 @@
 html,
 body,
 .wy-grid-for-nav  {
-    background-color: var(--color-f);
+    background-color: var(--color-f) !important;
+    position: relative;
+}
+
+body {
+    margin-top: 4.5rem;
+}
+
+hr {
+    margin-block: 2rem;
+    border-color: var(--color-a);
 }
 
 /* TYPE FACES */
@@ -144,19 +163,11 @@ pre {
     background: #fafafa;
 }
 
-.wy-side-nav-search > a img.logo {
-    width: 100px;
-    padding: 0;
-}
-
-.wy-side-nav-search > a {
-    padding: 0;
-    margin: 0;
-}
-
 /* project version (displayed under project logo) */
 .wy-side-nav-search > div.version {
-    color: #272525;
+    color: var(--color-a);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
 }
 
 /* Link to Remix IDE shown next to code snippets */
@@ -223,6 +234,114 @@ code.docutils.literal.notranslate {
 }
 .wy-nav-content {
     color: var(--color-a);
+}
+
+nav.wy-nav-side a {
+    color: var(--color-a) !important;
+    background: transparent;
+}
+
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3>a,
+.wy-menu-vertical li.current a:hover {
+    background-color: var(--menu-bg) !important;
+}
+
+ul.current ul {
+    background: var(--menu-bg) !important;
+}
+
+.wy-menu-vertical li.on a,
+.wy-menu-vertical li.current>a {
+    background: var(--menu-bg) !important;
+    border-bottom: 0px !important;
+    border-top: 0px !important;
+}
+
+.wy-menu-vertical li.current {
+    background: var(--menu-bg) !important;
+}
+
+.btn-neutral {
+    background: var(--color-d) !important;
+    color: var(--color-a) !important;
+}
+
+.btn-neutral:hover {
+    background: var(--color-e) !important;
+    /* color: var(--color-a) !important; */
+}
+
+nav.wy-nav-side {
+    /** The default padding of 2em is too small and the "Keyword Index" link gets obscured
+     * by the version toggle.
+     */
+    padding-bottom: 3em;
+    position: absolute !important;
+}
+
+.unified-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99999;
+    background: var(--color-f);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    padding-inline: 1.5rem;
+    padding-block: 1rem;
+}
+
+.unified-header .home-link {
+    display: block;
+    text-decoration: none;
+    width: 25px;
+    height: 40px;
+}
+
+.unified-header .home-link:hover .solidity-logo {
+    transform: scale(1.1);
+    transition: transform 100ms ease-in-out;
+}
+
+.unified-header img.solidity-logo {
+    transform: scale(1);
+    transition: transform 100ms ease-in-out;
+    width: 100%;
+    height: 100%;
+}
+
+.unified-header .nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.unified-header .nav-link {
+    display: inline-block;
+    padding-inline: 8px;
+    padding-block: 4px;
+    font-size: 14px;
+    font-family: 'Overpass Mono', monospace;
+    text-decoration: none;
+    color: var(--color-a);
+}
+
+ul.search .context {
+    color: var(--color-a) !important;
+}
+
+.rst-versions {
+    background: var(--color-f);
+}
+
+.rst-versions .rst-other-versions {
+    color: var(--color-c) !important;
+}
+
+button.toctree-expand {
+    color: var(--color-anti-mode) !important;
 }
 
 
@@ -336,31 +455,12 @@ code.docutils.literal.notranslate {
     background-color: #2b2b2b !important;
 }
 
-/* .wy-menu-vertical a {
-    color: var(--color-a);
-} */
-
 :root[style*=dark] .wy-menu-vertical code.docutils.literal.notranslate {
     color: #404040;
     background: none !important;
     border: none !important;
 }
 
-/* .wy-nav-content {
-    background: #3c3c3c;
-    color: var(--color-a);
-} */
-
-:root[style*=dark] .wy-menu-vertical li.on a,
-:root[style*=dark] .wy-menu-vertical li.current>a {
-    background: #a3a3a3;
-    border-bottom: 0px !important;
-    border-top: 0px !important;
-}
-
-:root[style*=dark] .wy-menu-vertical li.current {
-    background: #b3b3b3;
-}
 
 :root[style*=dark] .toc-backref {
     color: grey !important;
@@ -873,14 +973,4 @@ code.docutils.literal.notranslate {
 
 :root[style*=dark] .a4 .sig-name {
     background-color: transparent !important;
-}
-
-
-.btn-neutral {
-    background: var(--color-d) !important;
-    color: var(--color-a) !important;
-}
-.btn-neutral:hover {
-    background: var(--color-e) !important;
-    /* color: var(--color-a) !important; */
 }

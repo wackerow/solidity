@@ -83,16 +83,15 @@ html.transition *:after {
 }
 
 nav.wy-nav-side {
+    background: transparent !important;
+    color: var(--color-a);
     /* The default padding of 2em is too small and the "Keyword Index" link gets obscured
      * by the version toggle. */
     padding-bottom: 3em;
-    background: transparent;
-    color: var(--color-a);
 }
 nav.wy-nav-side a {
     color: var(--color-a);
 }
-
 
 .wy-menu-vertical a:hover {
     background-color: #0002;
