@@ -7,8 +7,8 @@
     --color-e: #AEC0F1;
     --color-f: #E6E3EC; /* Background */
 
-    --color-mode: #FAF8FF;
-    --color-anti-mode: #110C4E;
+    --white: #FAF8FF;
+    --black: #110C4E;
     --menu-bg: #2B247C08;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
@@ -21,8 +21,8 @@
     --color-e: #672AC8 !important;
     --color-f: #2B247C !important;
 
-    --color-mode: #110C4E !important;
-    --color-anti-mode: #FAF8FF !important;
+    --white: #110C4E !important;
+    --black: #FAF8FF !important;
     --menu-bg: #E6E3EC08 !important;
 } 
 
@@ -347,7 +347,7 @@ ul.search .context {
 }
 
 button.toctree-expand {
-    color: var(--color-anti-mode) !important;
+    color: var(--black) !important;
 }
 
 /* Light/dark color mode toggle 🌓 */
@@ -375,21 +375,26 @@ button.color-toggle {
 }
 
 button.color-toggle:hover {
-    /* outline: 2px solid var(--color-a) */
     background: #0001;
 }
 
 button.color-toggle .color-toggle-icon {
-    width: 1em;
-    height: 1em;
+    --icon-size: 18px;
+    width: var(--icon-size);
+    height: var(--icon-size);
     display: inline-block;
     line-height: 1em;
     -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
     flex-shrink: 0;
-    color: currentColor;
     vertical-align: middle;
+    /* color: var(--color-a); */
 }
+
+/* :root[style*=dark] button.color-toggle svg.color-toggle-icon { */
+    /* color: var(--color-a); */
+/* } */
+
 
 button.mobile-menu-button {
     display: none;
@@ -1037,3 +1042,8 @@ button.mobile-menu-button {
     background-color: transparent !important;
 }
 
+
+
+.hidden {
+    display: none;
+}

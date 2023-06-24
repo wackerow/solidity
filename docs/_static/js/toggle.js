@@ -1,4 +1,4 @@
-function toggleCssMode() {
+function toggleColorMode() {
   var url_root =
     DOCUMENTATION_OPTIONS.URL_ROOT === "./"
       ? ""
@@ -33,27 +33,21 @@ function toggleCssMode() {
 
   // Update hamburger menu icon color
   document
-    .querySelector("img.mobile-menu-button")
+    .querySelector("button.mobile-menu-button img")
     .setAttribute(
       "src",
       newMode === LIGHT ? LIGHT_HAMBURGER_PATH : DARK_HAMBURGER_PATH
     );
 }
 
-function toggleMenu(forceClose = false) {
-  if (forceClose) {
-    document
-      .querySelectorAll('[data-toggle="rst-versions"]')
-      .forEach((el) => el.classList.remove("shift"));
-    document
-      .querySelectorAll('[data-toggle="wy-nav-shift"]')
-      .forEach((el) => el.classList.remove("shift"));
-  } else {
-    document
-      .querySelectorAll('[data-toggle="rst-versions"]')
-      .forEach((el) => el.classList.toggle("shift"));
-    document
-      .querySelectorAll('[data-toggle="wy-nav-shift"]')
-      .forEach((el) => el.classList.toggle("shift"));
-  }
+function toggleMenu(options = {}) {
+  const handle = ({ classList }) => {
+    if (typeof options.force !== "undefined") {
+      classList.toggle(MOBILE_MENU_TOGGLE_CLASS, options.force);
+    } else {
+      classList.toggle(MOBILE_MENU_TOGGLE_CLASS);
+    }
+  };
+  document.querySelectorAll('[data-toggle="rst-versions"]').forEach(handle);
+  document.querySelectorAll('[data-toggle="wy-nav-shift"]').forEach(handle);
 }

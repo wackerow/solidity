@@ -57,7 +57,7 @@ function buildHeader() {
   colorModeButton.setAttribute("type", "button");
   colorModeButton.setAttribute("aria-label", "Toggle light dark mode");
   colorModeButton.setAttribute("key", "color mode button");
-  colorModeButton.addEventListener("click", toggleCssMode);
+  colorModeButton.addEventListener("click", toggleColorMode);
   colorModeButton.appendChild(toggleIcon);
   navBar.appendChild(colorModeButton);
 
@@ -82,18 +82,10 @@ function buildHeader() {
 document.addEventListener("DOMContentLoaded", buildHeader);
 
 function initialize() {
-  // Load style sheets
-  var url_root =
-    DOCUMENTATION_OPTIONS.URL_ROOT === "./"
-      ? ""
-      : DOCUMENTATION_OPTIONS.URL_ROOT;
-
-  var lightCss = $(`link[href="${url_root}_static/pygments.css"]`)[0];
-
   // Check localStorage for existing color scheme preference
-  var prefersLight = localStorage.getItem(LS_COLOR_SCHEME) != DARK;
+  var prefersDark = localStorage.getItem(LS_COLOR_SCHEME) == DARK;
   // In case none existed, establish localStorage color scheme preference
-  var mode = prefersLight ? LIGHT : DARK;
+  var mode = prefersDark ? DARK : LIGHT;
   localStorage.setItem(LS_COLOR_SCHEME, mode);
 
   // Select the root element and set the style attribute to denote color-scheme attribute
@@ -101,23 +93,15 @@ function initialize() {
     .querySelector(":root")
     .setAttribute("style", `--color-scheme: ${mode}`);
 
-  // Set light/dark toggle switch to match localStorage preference
-  var checkbox = document.querySelector("input[name=mode]");
-  checkbox.checked = prefersLight;
-
-  // Enable/disable light style sheets
-  lightCss.sheet.disabled = !prefersLight;
+  // Remove old input
+  document.querySelector("input[name=mode]").remove();
+  document.querySelector("label[for=switch]").remove();
 
   // Remove old RTD logo anchor element
   document.querySelector(".wy-side-nav-search > a").remove();
 
-  // Add event listener to toggle switch
-  checkbox.addEventListener("change", function () {
-    toggleCssMode();
-  });
-
   // Close menu
-  toggleMenu(true); // true => force close
+  toggleMenu({ force: false });
 }
 
 document.addEventListener("DOMContentLoaded", initialize);

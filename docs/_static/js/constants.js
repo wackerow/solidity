@@ -26,3 +26,5 @@ const NAV_LINKS = [
   { name: "About", href: ABOUT_PATH },
   { name: "Forum", href: FORUM_URL },
 ];
+
+const MOBILE_MENU_TOGGLE_CLASS = "shift";
