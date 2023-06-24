@@ -40,12 +40,20 @@ function toggleCssMode() {
     );
 }
 
-function toggleMenu() {
-  console.log("INSIDE toggleMenu()");
-  document
-    .querySelectorAll('[data-toggle="rst-versions"]')
-    .forEach((el) => el.classList.toggle("shift"));
-  document
-    .querySelectorAll('[data-toggle="wy-nav-shift"]')
-    .forEach((el) => el.classList.toggle("shift"));
+function toggleMenu(forceClose = false) {
+  if (forceClose) {
+    document
+      .querySelectorAll('[data-toggle="rst-versions"]')
+      .forEach((el) => el.classList.remove("shift"));
+    document
+      .querySelectorAll('[data-toggle="wy-nav-shift"]')
+      .forEach((el) => el.classList.remove("shift"));
+  } else {
+    document
+      .querySelectorAll('[data-toggle="rst-versions"]')
+      .forEach((el) => el.classList.toggle("shift"));
+    document
+      .querySelectorAll('[data-toggle="wy-nav-shift"]')
+      .forEach((el) => el.classList.toggle("shift"));
+  }
 }

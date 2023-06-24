@@ -115,6 +115,9 @@ function initialize() {
   checkbox.addEventListener("change", function () {
     toggleCssMode();
   });
+
+  // Close menu
+  toggleMenu(true); // true => force close
 }
 
 document.addEventListener("DOMContentLoaded", initialize);
