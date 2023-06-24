@@ -5,10 +5,10 @@ function toggleCssMode() {
       : DOCUMENTATION_OPTIONS.URL_ROOT;
 
   // Check localStorage for previous color scheme preference, assign the opposite
-  var newMode = localStorage.getItem("color-scheme") == DARK ? LIGHT : DARK;
+  var newMode = localStorage.getItem(LS_COLOR_SCHEME) == DARK ? LIGHT : DARK;
 
   // Update localStorage with new color scheme preference
-  localStorage.setItem("color-scheme", newMode);
+  localStorage.setItem(LS_COLOR_SCHEME, newMode);
 
   // Update the root element with the new color scheme preference
   document
@@ -23,6 +23,29 @@ function toggleCssMode() {
 
   // Update logo
   document
-    .querySelector("img.solidity-logo")
+    .querySelector(`img.${SOLIDITY_LOGO_CLASS}`)
     .setAttribute("src", newMode === LIGHT ? LIGHT_LOGO_PATH : DARK_LOGO_PATH);
+
+  // Update color mode toggle icon
+  document
+    .querySelector(`img.${COLOR_TOGGLE_ICON_CLASS}`)
+    .setAttribute("src", newMode === LIGHT ? MOON_ICON_PATH : SUN_ICON_PATH);
+
+  // Update hamburger menu icon color
+  document
+    .querySelector("img.mobile-menu-button")
+    .setAttribute(
+      "src",
+      newMode === LIGHT ? LIGHT_HAMBURGER_PATH : DARK_HAMBURGER_PATH
+    );
+}
+
+function toggleMenu() {
+  console.log("INSIDE toggleMenu()");
+  document
+    .querySelectorAll('[data-toggle="rst-versions"]')
+    .forEach((el) => el.classList.toggle("shift"));
+  document
+    .querySelectorAll('[data-toggle="wy-nav-shift"]')
+    .forEach((el) => el.classList.toggle("shift"));
 }

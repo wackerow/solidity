@@ -7,8 +7,8 @@
     --color-e: #AEC0F1;
     --color-f: #E6E3EC; /* Background */
 
-    --color-mode: white;
-    --color-anti-mode: black;
+    --color-mode: #FAF8FF;
+    --color-anti-mode: #110C4E;
     --menu-bg: #2B247C08;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
@@ -21,8 +21,8 @@
     --color-e: #672AC8 !important;
     --color-f: #2B247C !important;
 
-    --color-mode: black !important;
-    --color-anti-mode: white !important;
+    --color-mode: #110C4E !important;
+    --color-anti-mode: #FAF8FF !important;
     --menu-bg: #E6E3EC08 !important;
 } 
 
@@ -328,6 +328,12 @@ nav.wy-nav-side {
     color: var(--color-a);
 }
 
+@media (max-width: 768px) {
+    .unified-header .nav-link {
+        display: none;
+    }
+}
+
 ul.search .context {
     color: var(--color-a) !important;
 }
@@ -343,6 +349,62 @@ ul.search .context {
 button.toctree-expand {
     color: var(--color-anti-mode) !important;
 }
+
+/* Light/dark color mode toggle 🌓 */
+button.color-toggle {
+    display: inline-flex;
+    appearance: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    user-select: none;
+    outline: transparent solid 2px;
+    outline-offset: -2px;
+    border-radius: 6px;
+    height: 40px;
+    width: 40px;
+    background: none;
+    border: none;
+    transition-duration: 200ms;
+    transition-property: background-color,
+        color,
+        fill,
+        stroke,
+        opacity;
+}
+
+button.color-toggle:hover {
+    /* outline: 2px solid var(--color-a) */
+    background: #0001;
+}
+
+button.color-toggle .color-toggle-icon {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    line-height: 1em;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    color: currentColor;
+    vertical-align: middle;
+}
+
+button.mobile-menu-button {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    nav.wy-nav-top {
+        display: none;
+    }
+
+    button.mobile-menu-button {
+        display: block;
+    }  
+}
+
 
 
 /* DARK MODE STYLING */
@@ -974,3 +1036,4 @@ button.toctree-expand {
 :root[style*=dark] .a4 .sig-name {
     background-color: transparent !important;
 }
+
