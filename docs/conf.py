@@ -32,6 +32,7 @@ def setup(sphinx):
     sphinx.add_lexer('Yul', YulLexer)
 
     sphinx.add_css_file('css/custom.css')
+    sphinx.add_css_file('css/pygments.css')
 
 # -- General configuration ------------------------------------------------
 

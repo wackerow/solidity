@@ -10,12 +10,6 @@ function toggleColorMode() {
     .querySelector(":root")
     .setAttribute("style", `--color-scheme: ${newMode}`);
 
-  // Select the light style sheets
-  var lightCss = $(`link[href="${url_root}_static/pygments.css"]`)[0].sheet;
-
-  // Enable/disable style sheets
-  lightCss.disabled = newMode === DARK;
-
   // Update logo
   document
     .querySelector(`img.${SOLIDITY_LOGO_CLASS}`)

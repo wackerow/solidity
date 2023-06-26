@@ -28,26 +28,6 @@
     --menu-bg: #E6E3EC08 !important;
 } 
 
-* {
-    transition: background 200ms ease-in-out;
-}
-
-html,
-body,
-.wy-grid-for-nav  {
-    background-color: var(--color-f) !important;
-    position: relative;
-}
-
-body {
-    margin-top: var(--navHeight);
-}
-
-hr {
-    margin-block: 2rem;
-    border-color: var(--color-a);
-}
-
 /* TYPE FACES */
 @font-face {
     font-family: 'Overpass';
@@ -99,16 +79,30 @@ hr {
     src: url("/_static/fonts/overpass-mono/overpass-mono-bold.otf");
 }
 
+* {
+    transition: background 200ms ease-in-out;
+}
+
+html,
+body,
+.wy-grid-for-nav  {
+    background-color: var(--color-f) !important;
+    position: relative;
+}
+
+body {
+    margin-top: var(--navHeight);
+    font-family: "Overpass", sans-serif;
+}
+
+hr {
+    margin-block: 2rem;
+    border-color: var(--color-d);
+}
+
+
 /* HEADER STYLES */
 h1 {
-    font-family: 'Overpass', sans-serif;
-    font-weight: 700;
-    font-size: 48px; /* 64px */
-    color: var(--color-a) !important;
-    line-height: 1.1;
-    text-wrap: balance;
-}
-h2 {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
     font-size: 44px;
@@ -116,13 +110,27 @@ h2 {
     line-height: 1.1;
     text-wrap: balance;
 }
-*:not([role=navigation]) > p[role=heading] > span,
-h3 {
+section:first-of-type h1:first-of-type {
+    font-family: 'Overpass mono', monospace;
+    font-size: 48px;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+h2 {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
     font-size: 38px;
     color: var(--color-a) !important;
-    line-height: 1.2;
+    line-height: 46px;
+    text-wrap: balance;
+}
+*:not([role=navigation]) > p[role=heading] > span,
+h3 {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--color-a) !important;
+    line-height: 46px;
     text-wrap: balance;
 }
 h4 {
@@ -130,7 +138,7 @@ h4 {
     font-weight: 700;
     font-size: 32px;
     color: var(--color-a) !important;
-    line-height: 1.4;
+    line-height: 46px;
     text-wrap: balance;
 }
 h5 {
@@ -223,7 +231,7 @@ pre {
     background-color: transparent !important;
     color: var(--color-a) !important;
     box-shadow: 0 4 4 0 var(--color-a);
-    border-bottom: 1px solid var(--color-a) !important;
+    border-bottom: 1px solid var(--color-d) !important;
 }
 
 .wy-side-nav-search svg {
@@ -244,19 +252,43 @@ pre {
     margin-inline: auto;
 }
 
+.wy-breadcrumbs a.icon-home:before {
+    content: "Documentation";
+    font-family: "Overpass", sans-serif;
+}
+
 .rst-content table.docutils thead {
     color: var(--color-a);
 }
+
 code.docutils.literal.notranslate {
     color: var(--color-a);
 }
+
 .wy-nav-content {
     color: var(--color-a);
+}
+
+.rst-content a:not(:visited) {
+    color: var(--color-b) !important;
+}
+
+.rst-content a:visited {
+    color: var(--color-c) !important;
+}
+.rst-content a {
+    text-decoration: underline;
+}
+
+.rst-content a:hover {
+    color: var(--color-d) !important;
 }
 
 nav.wy-nav-side a {
     color: var(--color-a) !important;
     background: transparent;
+    font-size: 1rem;
+    line-height: 125%;
 }
 
 ul.current ul,
@@ -267,6 +299,14 @@ ul.current ul,
 .wy-menu-vertical li.toctree-l5.current li.toctree-l6>a,
 .wy-menu-vertical li.current {
     background: var(--menu-bg) !important;
+}
+
+.wy-menu.wy-menu-vertical > ul {
+    margin-bottom: 3rem;
+}
+
+.wy-menu.wy-menu-vertical > p {
+    color: var(--color-c);
 }
 
 .wy-menu-vertical li.on a,
@@ -296,6 +336,9 @@ nav.wy-nav-side {
     padding-bottom: 8rem;
 }
 
+.wy-side-nav-search input[type=text] {
+    border-radius: 0;
+}
 
 .unified-header {
     position: fixed;

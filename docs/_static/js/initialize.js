@@ -1,6 +1,3 @@
-var url_root =
-  DOCUMENTATION_OPTIONS.URL_ROOT === "./" ? "" : DOCUMENTATION_OPTIONS.URL_ROOT;
-
 const getLogoSrc = (isDark) => (isDark ? DARK_LOGO_PATH : LIGHT_LOGO_PATH);
 
 const getModeIconSrc = (isDark) => (isDark ? SUN_ICON_PATH : MOON_ICON_PATH);
@@ -113,10 +110,6 @@ function initialize() {
   document
     .querySelector(":root")
     .setAttribute("style", `--color-scheme: ${mode}`);
-
-  // Enable/disable pygments
-  var lightCss = $(`link[href="${url_root}_static/pygments.css"]`)[0].sheet;
-  lightCss.disabled = !prefersDark;
 
   // Remove old input and RTD logo anchor element
   document.querySelector("input[name=mode]").remove();
