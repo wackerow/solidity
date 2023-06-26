@@ -84,6 +84,24 @@ function buildHeader() {
 
 document.addEventListener("DOMContentLoaded", buildHeader);
 
+const updateActiveNavLink = () => {
+  const navLinks = document.querySelectorAll(".unified-header .nav-link");
+  navLinks.forEach((link) => {
+    const href = link.getAttribute("href");
+    if (document.documentURI.includes("contributing.html")) {
+      link.classList[href.includes("contributing.html") ? "add" : "remove"](
+        "active"
+      );
+    } else {
+      link.classList[document.documentURI.includes(href) ? "add" : "remove"](
+        "active"
+      );
+    }
+  });
+};
+
+document.addEventListener("locationchange", updateActiveNavLink);
+
 function initialize() {
   // Check localStorage for existing color scheme preference
   var prefersDark = localStorage.getItem(LS_COLOR_SCHEME) == DARK;
@@ -107,6 +125,9 @@ function initialize() {
 
   // Close menu
   toggleMenu({ force: false });
+
+  // Update active nav link
+  updateActiveNavLink();
 }
 
 document.addEventListener("DOMContentLoaded", initialize);

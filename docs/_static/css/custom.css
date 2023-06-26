@@ -352,6 +352,10 @@ nav.wy-nav-side {
     }
 }
 
+.unified-header .nav-link.active {
+    background: var(--white);
+}
+
 ul.search .context {
     color: var(--color-a) !important;
 }
