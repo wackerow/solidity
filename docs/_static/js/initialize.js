@@ -1,13 +1,16 @@
-const isDarkMode = localStorage.getItem(LS_COLOR_SCHEME) != DARK;
+var url_root =
+  DOCUMENTATION_OPTIONS.URL_ROOT === "./" ? "" : DOCUMENTATION_OPTIONS.URL_ROOT;
 
-const getLogoSrc = () => (isDarkMode ? LIGHT_LOGO_PATH : DARK_LOGO_PATH);
+const getLogoSrc = (isDark) => (isDark ? DARK_LOGO_PATH : LIGHT_LOGO_PATH);
 
-const getToggleIconSrc = () => (isDarkMode ? MOON_ICON_PATH : SUN_ICON_PATH);
+const getModeIconSrc = (isDark) => (isDark ? SUN_ICON_PATH : MOON_ICON_PATH);
 
-const getMenuIconSrc = () =>
-  isDarkMode ? DARK_HAMBURGER_PATH : LIGHT_HAMBURGER_PATH;
+const getMenuIconSrc = (isDark) =>
+  isDark ? DARK_HAMBURGER_PATH : LIGHT_HAMBURGER_PATH;
 
 function buildHeader() {
+  const isDarkMode = localStorage.getItem(LS_COLOR_SCHEME) == DARK;
+
   const header = document.createElement("div");
   header.classList.add("unified-header");
   document.querySelector("body").prepend(header);
@@ -20,7 +23,7 @@ function buildHeader() {
 
   const logo = document.createElement("img");
   logo.classList.add(SOLIDITY_LOGO_CLASS);
-  logo.src = getLogoSrc();
+  logo.src = getLogoSrc(isDarkMode);
   logo.alt = "Solidity logo";
   homeLink.appendChild(logo);
 
@@ -48,7 +51,7 @@ function buildHeader() {
   // Build color toggle
   const toggleIcon = document.createElement("img");
   toggleIcon.classList.add(COLOR_TOGGLE_ICON_CLASS);
-  toggleIcon.src = getToggleIconSrc();
+  toggleIcon.src = getModeIconSrc(isDarkMode);
   toggleIcon.alt = "Color mode toggle icon";
   toggleIcon.setAttribute("aria-hidden", "true");
   toggleIcon.setAttribute("key", "toggle icon");
@@ -64,7 +67,7 @@ function buildHeader() {
   // Build mobile hamburger menu
   const menuIcon = document.createElement("img");
   menuIcon.classList.add(COLOR_TOGGLE_ICON_CLASS);
-  menuIcon.src = getMenuIconSrc();
+  menuIcon.src = getMenuIconSrc(isDarkMode);
   menuIcon.alt = "Toggle menu";
   menuIcon.setAttribute("aria-hidden", "true");
   menuIcon.setAttribute("key", "menu icon");
@@ -74,7 +77,7 @@ function buildHeader() {
   menuButton.setAttribute("type", "button");
   menuButton.setAttribute("aria-label", "Toggle menu");
   menuButton.setAttribute("key", "menu button");
-  menuButton.addEventListener("click", toggleMenu());
+  menuButton.addEventListener("click", toggleMenu);
   menuButton.appendChild(menuIcon);
   navBar.appendChild(menuButton);
 }
@@ -93,11 +96,13 @@ function initialize() {
     .querySelector(":root")
     .setAttribute("style", `--color-scheme: ${mode}`);
 
-  // Remove old input
+  // Enable/disable pygments
+  var lightCss = $(`link[href="${url_root}_static/pygments.css"]`)[0].sheet;
+  lightCss.disabled = !prefersDark;
+
+  // Remove old input and RTD logo anchor element
   document.querySelector("input[name=mode]").remove();
   document.querySelector("label[for=switch]").remove();
-
-  // Remove old RTD logo anchor element
   document.querySelector(".wy-side-nav-search > a").remove();
 
   // Close menu

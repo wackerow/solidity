@@ -1,9 +1,4 @@
 function toggleColorMode() {
-  var url_root =
-    DOCUMENTATION_OPTIONS.URL_ROOT === "./"
-      ? ""
-      : DOCUMENTATION_OPTIONS.URL_ROOT;
-
   // Check localStorage for previous color scheme preference, assign the opposite
   var newMode = localStorage.getItem(LS_COLOR_SCHEME) == DARK ? LIGHT : DARK;
 

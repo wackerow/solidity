@@ -11,6 +11,8 @@
     --black: #110C4E;
     --menu-bg: #2B247C08;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    --navHeight: 4.5rem;
 }
 
 :root[style*=dark] {
@@ -38,7 +40,7 @@ body,
 }
 
 body {
-    margin-top: 4.5rem;
+    margin-top: var(--navHeight);
 }
 
 hr {
@@ -110,7 +112,7 @@ h2 {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
     font-size: 44px;
-    color: var(--color-b) !important;
+    color: var(--color-a) !important;
     line-height: 1.1;
     text-wrap: balance;
 }
@@ -119,7 +121,7 @@ h3 {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
     font-size: 38px;
-    color: var(--color-b) !important;
+    color: var(--color-a) !important;
     line-height: 1.2;
     text-wrap: balance;
 }
@@ -127,7 +129,23 @@ h4 {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
     font-size: 32px;
-    color: var(--color-b) !important;
+    color: var(--color-a) !important;
+    line-height: 1.4;
+    text-wrap: balance;
+}
+h5 {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-a) !important;
+    line-height: 1.4;
+    text-wrap: balance;
+}
+h6 {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--color-a) !important;
     line-height: 1.4;
     text-wrap: balance;
 }
@@ -272,12 +290,15 @@ ul.current ul {
 }
 
 nav.wy-nav-side {
-    /** The default padding of 2em is too small and the "Keyword Index" link gets obscured
-     * by the version toggle.
-     */
+    position: fixed !important;
+    top: var(--navHeight);
+    background: transparent !important;
+    color: var(--color-a) !important;
+    /* The default padding of 2em is too small and the "Keyword Index" link gets obscured
+     * by the version toggle. */
     padding-bottom: 3em;
-    position: absolute !important;
 }
+
 
 .unified-header {
     position: fixed;
