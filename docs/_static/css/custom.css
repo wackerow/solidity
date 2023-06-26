@@ -384,7 +384,7 @@ button.color-toggle {
     width: 40px;
     background: none;
     border: none;
-    padding: 8px;
+    padding: 11px;
     transition-duration: 200ms;
     transition-property: background-color,
         color,
