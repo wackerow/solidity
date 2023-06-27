@@ -5,18 +5,44 @@ const getModeIconSrc = (isDark) => (isDark ? SUN_ICON_PATH : MOON_ICON_PATH);
 const getMenuIconSrc = (isDark) =>
   isDark ? DARK_HAMBURGER_PATH : LIGHT_HAMBURGER_PATH;
 
+function wrapBody() {
+  const bodyDivs = document.querySelectorAll("body>div");
+  bodyDivs.forEach((div) => div.remove());
+  const wrapperDiv = document.createElement("div");
+  wrapperDiv.classList.add(WRAPPER_CLASS);
+  bodyDivs.forEach((div) => wrapperDiv.appendChild(div));
+  document.body.prepend(wrapperDiv);
+}
+
+function rearrangeDom() {
+  const rstVersions = document.querySelector(".rst-versions");
+  rstVersions.remove();
+  document.querySelector("nav.wy-nav-side").appendChild(rstVersions);
+  // .wy-nav-content-wrap  section.wy-nav-content-wrap  div.wy-nav-content
+
+  const content = document.querySelector(".wy-nav-content");
+  const oldWrap = document.querySelector("section.wy-nav-content-wrap");
+  oldWrap.remove();
+  document.querySelector(".wy-grid-for-nav").appendChild(content);
+}
+
 function buildHeader() {
   const isDarkMode = localStorage.getItem(LS_COLOR_SCHEME) == DARK;
 
   const header = document.createElement("div");
   header.classList.add("unified-header");
-  document.querySelector("body").prepend(header);
+  document.querySelector(`.${WRAPPER_CLASS}`).prepend(header);
+  // document.querySelector("body").prepend(header);
+
+  const innerHeader = document.createElement("div");
+  innerHeader.classList.add("inner-header");
+  header.appendChild(innerHeader);
 
   const homeLink = document.createElement("a");
   homeLink.classList.add("home-link");
   homeLink.href = SOLIDITY_HOME_URL;
   homeLink.ariaLabel = "Solidity home";
-  header.appendChild(homeLink);
+  innerHeader.appendChild(homeLink);
 
   const logo = document.createElement("img");
   logo.classList.add(SOLIDITY_LOGO_CLASS);
@@ -26,7 +52,7 @@ function buildHeader() {
 
   const navBar = document.createElement("nav");
   navBar.classList.add("nav-bar");
-  header.appendChild(navBar);
+  innerHeader.appendChild(navBar);
 
   const linkElements = NAV_LINKS.map(({ name, href }) => {
     const link = document.createElement("a");
@@ -79,8 +105,6 @@ function buildHeader() {
   navBar.appendChild(menuButton);
 }
 
-document.addEventListener("DOMContentLoaded", buildHeader);
-
 const updateActiveNavLink = () => {
   const navLinks = document.querySelectorAll(".unified-header .nav-link");
   navLinks.forEach((link) => {
@@ -100,6 +124,10 @@ const updateActiveNavLink = () => {
 document.addEventListener("locationchange", updateActiveNavLink);
 
 function initialize() {
+  wrapBody();
+  rearrangeDom();
+  buildHeader();
+
   // Check localStorage for existing color scheme preference
   var prefersDark = localStorage.getItem(LS_COLOR_SCHEME) == DARK;
   // In case none existed, establish localStorage color scheme preference
@@ -124,3 +152,10 @@ function initialize() {
 }
 
 document.addEventListener("DOMContentLoaded", initialize);
+
+document.addEventListener("click", (e) => {
+  console.log({ e });
+  if (e.target.closest(".wy-nav-content")) {
+    toggleMenu({ force: false });
+  }
+});

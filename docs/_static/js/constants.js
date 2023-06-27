@@ -28,3 +28,4 @@ const NAV_LINKS = [
 ];
 
 const MOBILE_MENU_TOGGLE_CLASS = "shift";
+const WRAPPER_CLASS = "unified-wrapper";
