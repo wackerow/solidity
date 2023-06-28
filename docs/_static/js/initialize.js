@@ -134,8 +134,11 @@ function initialize() {
   if (colorSchemeParam) {
     prefersDark = colorSchemeParam == DARK;
   }
+
   // Remove search params from URL
-  window.history.replaceState(document.location.href, document.title, ".");
+  const { location, title } = document;
+  const { pathname, origin, hash } = location;
+  window.history.replaceState(origin, title, pathname + hash);
 
   // In case none existed, establish localStorage color scheme preference
   var mode = prefersDark ? DARK : LIGHT;
@@ -180,5 +183,3 @@ document.addEventListener("click", (e) => {
     }
   }
 });
-
-document.addEventListener("linkclick", consol.log);

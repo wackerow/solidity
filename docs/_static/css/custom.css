@@ -80,7 +80,9 @@
     src: url("/_static/fonts/overpass-mono/overpass-mono-bold.otf");
 }
 
-* {
+html,
+body,
+div {
     transition: background 200ms ease-in-out;
 }
 
@@ -313,12 +315,16 @@ ul.current ul,
 }
 
 .btn-neutral {
-    background: var(--color-d) !important;
+    background: transparent !important;
     color: var(--color-a) !important;
+    border: 2px solid var(--color-a) !important;
+    text-decoration: none;
 }
 
 .btn-neutral:hover {
-    background: var(--color-e) !important;
+    background: var(--white) !important;
+    color: var(--color-b) !important;
+    border-color: var(--color-b) !important;
 }
 
 /**
@@ -402,9 +408,11 @@ ul.current ul,
     letter-spacing: -0.02em;
     font-weight: 400;
 }
-
 .unified-header .nav-link.active {
     background: var(--white);
+}
+.unified-header .nav-link:hover {
+    text-decoration: underline;
 }
 
 /* Rest: Grid, with two children: side bar, and content */
