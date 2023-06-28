@@ -5,16 +5,14 @@ const getModeIconSrc = (isDark) => (isDark ? SUN_ICON_PATH : MOON_ICON_PATH);
 const getMenuIconSrc = (isDark) =>
   isDark ? DARK_HAMBURGER_PATH : LIGHT_HAMBURGER_PATH;
 
-function wrapBody() {
+function rearrangeDom() {
   const bodyDivs = document.querySelectorAll("body>div");
   bodyDivs.forEach((div) => div.remove());
   const wrapperDiv = document.createElement("div");
   wrapperDiv.classList.add(WRAPPER_CLASS);
   bodyDivs.forEach((div) => wrapperDiv.appendChild(div));
   document.body.prepend(wrapperDiv);
-}
 
-function rearrangeDom() {
   const rstVersions = document.querySelector(".rst-versions");
   rstVersions.remove();
   document.querySelector("nav.wy-nav-side").appendChild(rstVersions);
@@ -124,12 +122,21 @@ const updateActiveNavLink = () => {
 document.addEventListener("locationchange", updateActiveNavLink);
 
 function initialize() {
-  wrapBody();
   rearrangeDom();
-  buildHeader();
 
   // Check localStorage for existing color scheme preference
   var prefersDark = localStorage.getItem(LS_COLOR_SCHEME) == DARK;
+  // Check link for search param "pcm"... it may be "light" or "dark"
+  var urlParams = new URLSearchParams(window.location.search);
+  var colorSchemeParam = urlParams.get("pcm");
+  // This is used for continuity between the main Solidity Lang site and the docs
+  // If present, overwrite prefersDark accordingly
+  if (colorSchemeParam) {
+    prefersDark = colorSchemeParam == DARK;
+  }
+  // Remove all search params from URL
+  window.history.replaceState({}, document.title, ".");
+
   // In case none existed, establish localStorage color scheme preference
   var mode = prefersDark ? DARK : LIGHT;
   localStorage.setItem(LS_COLOR_SCHEME, mode);
@@ -144,6 +151,9 @@ function initialize() {
   document.querySelector("label[for=switch]").remove();
   document.querySelector(".wy-side-nav-search > a").remove();
 
+  // Build header
+  buildHeader();
+
   // Close menu
   toggleMenu({ force: false });
 
@@ -154,8 +164,21 @@ function initialize() {
 document.addEventListener("DOMContentLoaded", initialize);
 
 document.addEventListener("click", (e) => {
-  console.log({ e });
   if (e.target.closest(".wy-nav-content")) {
     toggleMenu({ force: false });
   }
+
+  if (e.target.closest("a")) {
+    const target = e.target.closest("a");
+    const href = target.getAttribute("href");
+    if (href.includes(SOLIDITY_HOME_URL)) {
+      const url = new URL(href);
+      const params = new URLSearchParams(url.search);
+      params.set("pcm", localStorage.getItem(LS_COLOR_SCHEME));
+      url.search = params.toString();
+      target.setAttribute("href", url.toString());
+    }
+  }
 });
+
+document.addEventListener("linkclick", consol.log);

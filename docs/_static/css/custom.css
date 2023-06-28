@@ -399,6 +399,8 @@ ul.current ul,
     font-family: 'Overpass Mono', monospace;
     text-decoration: none;
     color: var(--color-a);
+    letter-spacing: -0.02em;
+    font-weight: 400;
 }
 
 .unified-header .nav-link.active {
