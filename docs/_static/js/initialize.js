@@ -134,8 +134,8 @@ function initialize() {
   if (colorSchemeParam) {
     prefersDark = colorSchemeParam == DARK;
   }
-  // Remove all search params from URL
-  window.history.replaceState({}, document.title, ".");
+  // Remove search params from URL
+  window.history.replaceState(document.location.href, document.title, ".");
 
   // In case none existed, establish localStorage color scheme preference
   var mode = prefersDark ? DARK : LIGHT;
