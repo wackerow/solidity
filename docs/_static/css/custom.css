@@ -82,7 +82,10 @@
 
 html,
 body,
-div {
+.unified-header::before,
+.wy-nav-side,
+.rst-versions,
+.wy-grid-for-nav {
     transition: background 200ms ease-in-out;
 }
 
@@ -317,16 +320,17 @@ ul.current ul,
     border-radius: 0;
     text-decoration: none !important;
 }
-.btn-neutral:visited,
-.btn-neutral:not(:visited),
-.btn-neutral {
+
+a.btn.btn-neutral:visited,
+a.btn.btn-neutral:not(:visited),
+a.btn.btn-neutral {
     background: transparent !important;
     color: var(--color-a) !important;
     border: 2px solid var(--color-a) !important;
     text-decoration: none;
 }
 
-.btn-neutral:hover {
+a.btn.btn-neutral:hover {
     background: var(--white) !important;
     color: var(--color-b) !important;
     border-color: var(--color-b) !important;

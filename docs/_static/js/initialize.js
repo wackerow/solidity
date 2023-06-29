@@ -130,17 +130,27 @@ function initialize() {
   var prefersDark = localStorage.getItem(LS_COLOR_SCHEME) == DARK;
   // Check link for search param "pcm"... it may be "light" or "dark"
   var urlParams = new URLSearchParams(window.location.search);
-  var colorSchemeParam = urlParams.get("pcm");
-  // This is used for continuity between the main Solidity Lang site and the docs
-  // If present, overwrite prefersDark accordingly
-  if (colorSchemeParam) {
-    prefersDark = colorSchemeParam == DARK;
-  }
+  if (urlParams.size > 0) {
+    // This is used for color mode continuity between the main Solidity Lang site and the docs
+    var colorSchemeParam = urlParams.get("pcm");
+    // If present, overwrite prefersDark accordingly
+    if (colorSchemeParam) {
+      prefersDark = colorSchemeParam == DARK;
+    }
 
-  // Remove search params from URL
-  const { location, title } = document;
-  const { pathname, origin, hash } = location;
-  window.history.replaceState(origin, title, pathname + hash);
+    // Remove "pcm" search param from URL
+    const { location, title } = document;
+    const { pathname, origin, search, hash } = location;
+    const newSearchParams = new URLSearchParams(search);
+    newSearchParams.delete("pcm");
+    const sanitizedSearch =
+      newSearchParams.size < 1 ? "" : "?" + newSearchParams.toString();
+    window.history.replaceState(
+      origin,
+      title,
+      pathname + sanitizedSearch + hash
+    );
+  }
 
   // In case none existed, establish localStorage color scheme preference
   var mode = prefersDark ? DARK : LIGHT;
