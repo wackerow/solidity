@@ -15,8 +15,11 @@ function rearrangeDom() {
 
   const rstVersions = document.querySelector(".rst-versions");
   rstVersions.remove();
-  document.querySelector("nav.wy-nav-side").appendChild(rstVersions);
-  // .wy-nav-content-wrap  section.wy-nav-content-wrap  div.wy-nav-content
+  const wyNavSide = document.querySelector("nav.wy-nav-side");
+  wyNavSide.appendChild(rstVersions);
+  const backdrop = document.createElement("div");
+  backdrop.classList.add("backdrop");
+  wrapperDiv.appendChild(backdrop);
 
   const content = document.querySelector(".wy-nav-content");
   const oldWrap = document.querySelector("section.wy-nav-content-wrap");
@@ -30,7 +33,6 @@ function buildHeader() {
   const header = document.createElement("div");
   header.classList.add("unified-header");
   document.querySelector(`.${WRAPPER_CLASS}`).prepend(header);
-  // document.querySelector("body").prepend(header);
 
   const innerHeader = document.createElement("div");
   innerHeader.classList.add("inner-header");
@@ -167,7 +169,7 @@ function initialize() {
 document.addEventListener("DOMContentLoaded", initialize);
 
 document.addEventListener("click", (e) => {
-  if (e.target.closest(".wy-nav-content")) {
+  if (e.target.closest(".backdrop")) {
     toggleMenu({ force: false });
   }
 

@@ -43,6 +43,5 @@ function toggleMenu(options = {}) {
   document
     .querySelectorAll('[data-toggle="wy-nav-shift"]')
     .forEach((e) => handleClassToggle(e, MOBILE_MENU_TOGGLE_CLASS));
-  handleClassToggle(document.querySelector(".wy-grid-for-nav"), "menu-open");
-  handleClassToggle(document.querySelector("nav.wy-nav-side"), "menu-open");
+  handleClassToggle(document.querySelector(`.${WRAPPER_CLASS}`), "menu-open");
 }

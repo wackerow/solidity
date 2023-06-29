@@ -39,7 +39,7 @@
 }
 
 :root[style*=dark] .rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td {
-  background-color: #5a5a5a;
+  background-color: #0002;
 }
 
 :root[style*=dark] .rst-content pre {
@@ -104,7 +104,6 @@
 }
 
 :root[style*=dark] .wy-menu-vertical code.docutils.literal.notranslate {
-  color: #404040;
   background: none !important;
   border: none !important;
 }
@@ -112,10 +111,6 @@
 
 :root[style*=dark] .toc-backref {
   color: grey !important;
-}
-
-:root[style*=dark] .highlight .hll {
-  background-color: #49483e
 }
 
 :root[style*=dark] .highlight {
@@ -600,8 +595,10 @@
 
 /* Link to Remix IDE shown over code snippets */
 
-:root[style*=dark] .rst-content .remix-link-container a.remix-link {
-  color: black;
+:root[style*=dark] .rst-content .remix-link-container a.remix-link,
+:root[style*=dark] .rst-content .remix-link-container a.remix-link:visited,
+:root[style*=dark] .rst-content .remix-link-container a.remix-link:not(:visited) {
+  color: black !important;
 }
 
 
@@ -622,4 +619,3 @@
 :root[style*=dark] .a4 .sig-name {
   background-color: transparent !important;
 }
-
