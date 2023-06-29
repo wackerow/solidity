@@ -615,3 +615,11 @@ button.mobile-menu-button {
 .hidden {
     display: none;
 }
+
+#search-results .search li:first-child,
+#search-results .search li {
+    border-color: var(--color-d);
+}
+#search-results .search li:last-child {
+    border: 0px;
+}
