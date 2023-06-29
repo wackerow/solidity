@@ -32,57 +32,6 @@
     --menu-bg: #E6E3EC08 !important;
 } 
 
-/* TYPE FACES */
-@font-face {
-    font-family: 'Overpass';
-    font-style: light;
-    font-weight: 300;
-    font-display: swap;
-    src: url("/_static/fonts/overpass/overpass-light.otf");
-}
-@font-face {
-    font-family: 'Overpass';
-    font-style:  normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url("/_static/fonts/overpass/overpass-regular.otf");
-}
-@font-face {
-    font-family: 'Overpass';
-    font-style:  medium;
-    font-weight: 500;
-    font-display: swap;
-    src: url("/_static/fonts/overpass/overpass-semibold.otf");
-}
-@font-face {
-    font-family: 'Overpass';
-    font-style:  bold;
-    font-weight: 700;
-    font-display: swap;
-    src: url("/_static/fonts/overpass/overpass-bold.otf");
-}
-@font-face {
-    font-family: 'Overpass';
-    font-style:  italic;
-    font-weight: 400;
-    font-display: swap;
-    src: url("/_static/fonts/overpass/overpass-italic.otf");
-}
-@font-face {
-    font-family: 'Overpass Mono';
-    font-style:  regular;
-    font-weight: 400;
-    font-display: swap;
-    src: url("/_static/fonts/overpass-mono/overpass-mono-regular.otf");
-}
-@font-face {
-    font-family: 'Overpass Mono';
-    font-style:  bold;
-    font-weight: 700;
-    font-display: swap;
-    src: url("/_static/fonts/overpass-mono/overpass-mono-bold.otf");
-}
-
 html,
 body,
 .unified-header::before,
@@ -371,7 +320,7 @@ a.btn.btn-neutral:hover {
     max-width: 80rem;
     align-items: center;
     justify-content: space-between;
-    padding-inline: 1.5rem;
+    padding-inline: 2rem;
     padding-block: 1rem;
 }
 
@@ -504,6 +453,9 @@ a.btn.btn-neutral:hover {
     .unified-header .nav-link {
         display: none;
     }
+    .unified-header .inner-header {
+    padding-inline: 1rem;
+    }
     .unified-wrapper .wy-grid-for-nav {
         grid-template-columns: 1fr;
     }
@@ -573,7 +525,7 @@ button.color-toggle {
     width: 40px;
     background: none;
     border: none;
-    padding: 11px;
+    padding: 0.75rem;
     transition-duration: 200ms;
     transition-property: background-color,
         color,

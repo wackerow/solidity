@@ -124,6 +124,22 @@ const updateActiveNavLink = () => {
 document.addEventListener("locationchange", updateActiveNavLink);
 
 function initialize() {
+  // Inject fonts as links in head
+  const fonts = [
+    "overpass-regular.otf",
+    "overpass-bold.otf",
+    "overpass-mono-regular.otf",
+    "overpass-mono-bold.otf",
+  ];
+  fonts.forEach((filename) => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "font";
+    link.href = `_static/fonts/${filename}`;
+    link.crossOrigin = "";
+    document.head.appendChild(link);
+  });
+
   rearrangeDom();
 
   // Check localStorage for existing color scheme preference

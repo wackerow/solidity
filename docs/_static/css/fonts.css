@@ -1,0 +1,57 @@
+/* overpass-400normal - latin */
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('_static/fonts/overpass-regular.otf') format('otf'),
+}
+
+/* overpass-400italic - latin */
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400;
+  src: url('_static/fonts/overpass-italic.otf') format('otf'),
+}
+
+/* overpass-600normal - latin */
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url('_static/fonts/overpass-semibold.otf') format('otf'),
+}
+
+/* overpass-700normal - latin */
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('_static/fonts/overpass-bold.otf') format('otf'),
+}
+
+
+
+
+
+
+/* overpass-mono-400normal - latin */
+@font-face {
+  font-family: 'Overpass Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('_static/fonts/overpass-mono-regular.otf') format('otf'),
+}
+
+/* overpass-mono-700normal - latin */
+@font-face {
+  font-family: 'Overpass Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('_static/fonts/overpass-mono-bold.otf') format('otf'),}
