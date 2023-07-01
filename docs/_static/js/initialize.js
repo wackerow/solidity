@@ -71,6 +71,11 @@ function buildHeader() {
   });
   linkElements.forEach((link) => navBar.appendChild(link));
 
+  // Flex wrapper for color mode and mobile menu buttons
+  const navButtonContainer = document.createElement("div");
+  navButtonContainer.classList.add("nav-button-container");
+  navBar.appendChild(navButtonContainer);
+
   // Build color toggle
   const toggleIcon = document.createElement("img");
   toggleIcon.classList.add(COLOR_TOGGLE_ICON_CLASS);
@@ -85,7 +90,7 @@ function buildHeader() {
   colorModeButton.setAttribute("key", "color mode button");
   colorModeButton.addEventListener("click", toggleColorMode);
   colorModeButton.appendChild(toggleIcon);
-  navBar.appendChild(colorModeButton);
+  navButtonContainer.appendChild(colorModeButton);
 
   // Build mobile hamburger menu
   const menuIcon = document.createElement("img");
@@ -102,7 +107,7 @@ function buildHeader() {
   menuButton.setAttribute("key", "menu button");
   menuButton.addEventListener("click", toggleMenu);
   menuButton.appendChild(menuIcon);
-  navBar.appendChild(menuButton);
+  navButtonContainer.appendChild(menuButton);
 }
 
 const updateActiveNavLink = () => {

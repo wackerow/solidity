@@ -363,6 +363,12 @@ footer .rst-footer-buttons {
     align-items: center;
     justify-content: flex-end;
 }
+.unified-header .nav-bar .nav-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
 
 .unified-header .nav-link {
     display: inline-block;
@@ -568,7 +574,7 @@ button.mobile-menu-button {
     }
 
     button.mobile-menu-button {
-        display: block;
+        display: flex;
     }  
 }
 
