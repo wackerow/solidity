@@ -116,6 +116,7 @@ h6 {
     text-wrap: balance;
 }
 
+span.pre,
 pre {
     white-space: pre-wrap;       /* css-3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
@@ -286,6 +287,11 @@ a.btn.btn-neutral:hover {
     background: var(--white) !important;
     color: var(--color-b) !important;
     border-color: var(--color-b) !important;
+}
+footer .rst-footer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
 }
 
 /**
