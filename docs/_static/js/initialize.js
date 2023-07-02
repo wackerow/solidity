@@ -60,13 +60,12 @@ function buildHeader() {
     link.setAttribute("key", name);
     link.setAttribute("href", href);
     link.setAttribute("aria-label", name);
-    let innerText = name;
     if (href === FORUM_URL) {
-      innerText += " ↗";
+      link.classList.add("forum-link");
       link.setAttribute("target", "_blank");
       link.setAttribute("rel", "noopener noreferrer");
     }
-    link.innerText = innerText;
+    link.innerText = name;
     return link;
   });
   linkElements.forEach((link) => navBar.appendChild(link));
@@ -129,7 +128,7 @@ const updateActiveNavLink = () => {
 document.addEventListener("locationchange", updateActiveNavLink);
 
 function initialize() {
-  // Inject fonts as links in head
+  // Preload fonts
   const fonts = [
     "overpass-regular.otf",
     "overpass-bold.otf",
@@ -140,7 +139,7 @@ function initialize() {
     const link = document.createElement("link");
     link.rel = "preload";
     link.as = "font";
-    link.href = `_static/fonts/${filename}`;
+    link.href = `https://solidity-docs-dev.readthedocs.io/en/latest/_static/fonts/${filename}`;
     link.crossOrigin = "";
     document.head.appendChild(link);
   });

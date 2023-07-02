@@ -123,6 +123,7 @@ pre {
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;
+    font-family: 'Overpass Mono', monospace;
 }
 
 .wy-table-responsive table td,
@@ -589,4 +590,10 @@ button.mobile-menu-button {
 }
 #search-results .search li:last-child {
     border: 0px;
+}
+.forum-link::after {
+    content: '\279A';
+    margin-inline-start: 0.25rem;
+    font-size: 14px;
+    font-family: 'Overpass Mono', monospace;
 }
