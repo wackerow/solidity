@@ -187,15 +187,12 @@ small * {
 }
 
 .rst-content .remix-link-container a.remix-link {
-    display: inline-block;
     font-size: 0.7em;
-    padding: 0.1em 0.4em;
-    background: #e1e4e5;
-    color: #707070;
-}
-
-.rst-content .remix-link-container a.remix-link:hover {
-    background: #c8cbcc;
+    padding: 0.1em 0.5em;
+    background: transparent;
+    color: var(--color-a);
+    border: 1px solid var(--color-a);
+    text-decoration: none;
 }
 
 .rst-content div.highlight-solidity,
@@ -247,9 +244,9 @@ code.docutils.literal.notranslate {
     color: var(--color-a);
 }
 
-.rst-content a:not(:visited) {
-    color: var(--color-b) !important;
-}
+/* .rst-content a:not(:visited) { */
+    /* color: var(--color-b) !important; */
+/* } */
 
 .rst-content a:visited {
     color: var(--color-c) !important;
@@ -306,7 +303,7 @@ ul.current ul,
 
 .wy-breadcrumbs-aside a,
 .wy-breadcrumbs-aside a:visited,
-.wy-breadcrumbs-aside a:not(:visited),
+/* .wy-breadcrumbs-aside a:not(:visited), */
 a.fa.fa-github,
 a.fa.fa-github:visited,
 a.fa.fa-github:not(:visited),
@@ -319,6 +316,7 @@ a.btn.btn-neutral {
     text-decoration: none;
 }
 
+.rst-content .remix-link-container a.remix-link:hover,
 .wy-breadcrumbs-aside a:hover,
 a.fa.fa-github:hover,
 a.btn.btn-neutral:hover {
