@@ -10,7 +10,7 @@
     --white: #FAF8FF;
     --black: #110C4E;
     --menu-bg: #2B247C08;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
     --navHeight: 4.5rem;
     --sideWidth: 300px;
@@ -30,7 +30,7 @@
     --white: #110C4E !important;
     --black: #FAF8FF !important;
     --menu-bg: #E6E3EC08 !important;
-} 
+}
 
 html,
 body,
@@ -43,7 +43,7 @@ body,
 
 html,
 body,
-.wy-grid-for-nav  {
+.wy-grid-for-nav {
     background-color: var(--color-f) !important;
     position: relative;
 }
@@ -55,7 +55,7 @@ body {
 
 hr {
     margin-block: 2rem;
-    border-color: var(--color-d);
+    border-color: var(--color-d) !important;
 }
 
 
@@ -68,12 +68,14 @@ h1 {
     line-height: 1.1;
     text-wrap: balance;
 }
+
 section:first-of-type h1:first-of-type {
     font-family: 'Overpass mono', monospace;
     font-size: 48px;
     margin-top: 3rem;
     margin-bottom: 5rem;
 }
+
 h2 {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
@@ -82,7 +84,8 @@ h2 {
     line-height: 46px;
     text-wrap: balance;
 }
-*:not([role=navigation]) > p[role=heading] > span,
+
+*:not([role=navigation])>p[role=heading]>span,
 h3 {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
@@ -91,6 +94,7 @@ h3 {
     line-height: 46px;
     text-wrap: balance;
 }
+
 h4 {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
@@ -99,6 +103,7 @@ h4 {
     line-height: 46px;
     text-wrap: balance;
 }
+
 h5 {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
@@ -107,6 +112,7 @@ h5 {
     line-height: 1.4;
     text-wrap: balance;
 }
+
 h6 {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
@@ -118,12 +124,21 @@ h6 {
 
 span.pre,
 pre {
-    white-space: pre-wrap;       /* css-3 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
+    /* css-3 */
+    white-space: pre-wrap;
+    /* Mozilla, since 1999 */
+    white-space: -moz-pre-wrap;
+    /* Opera 4-6 */
+    white-space: -pre-wrap;
+    /* Opera 7 */
+    white-space: -o-pre-wrap;
     word-wrap: break-word;
     font-family: 'Overpass Mono', monospace;
+}
+
+small,
+small * {
+    font-size: 12px;
 }
 
 .wy-table-responsive table td,
@@ -146,7 +161,7 @@ pre {
 }
 
 /* project version (displayed under project logo) */
-.wy-side-nav-search > div.version {
+.wy-side-nav-search>div.version {
     color: var(--color-b);
     margin-top: 0;
     margin-bottom: 0.5rem;
@@ -180,7 +195,8 @@ pre {
 
 /* CUSTOMIZATION UPDATES */
 
-.wy-nav-content-wrap, .wy-nav-content {
+.wy-nav-content-wrap,
+.wy-nav-content {
     background: transparent !important;
 }
 
@@ -228,6 +244,7 @@ code.docutils.literal.notranslate {
 .rst-content a:visited {
     color: var(--color-c) !important;
 }
+
 .rst-content a {
     text-decoration: underline;
 }
@@ -237,7 +254,7 @@ code.docutils.literal.notranslate {
 }
 
 nav.wy-nav-side a {
-    color: var(--color-a) !important;
+    color: var(--color-a);
     background: transparent;
     font-size: 1rem;
     line-height: 125%;
@@ -246,6 +263,7 @@ nav.wy-nav-side a {
 .wy-menu-vertical li.current a {
     border: none;
 }
+
 ul.current ul,
 .wy-menu-vertical li.toctree-l2.current li.toctree-l3>a,
 .wy-menu-vertical li.current a:hover,
@@ -256,11 +274,11 @@ ul.current ul,
     background: var(--menu-bg) !important;
 }
 
-.wy-menu.wy-menu-vertical > ul {
+.wy-menu.wy-menu-vertical>ul {
     margin-bottom: 3rem;
 }
 
-.wy-menu.wy-menu-vertical > p {
+.wy-menu.wy-menu-vertical>p {
     color: var(--color-c);
 }
 
@@ -298,6 +316,7 @@ a.btn.btn-neutral:hover {
     color: var(--color-b) !important;
     border-color: var(--color-b) !important;
 }
+
 footer .rst-footer-buttons {
     display: flex;
     justify-content: center;
@@ -346,7 +365,7 @@ footer .rst-footer-buttons {
     inset: 0;
     opacity: 95%;
     background: var(--color-f);
-    z-index:-1;
+    z-index: -1;
 }
 
 .unified-header .home-link {
@@ -373,6 +392,7 @@ footer .rst-footer-buttons {
     align-items: center;
     justify-content: flex-end;
 }
+
 .unified-header .nav-bar .nav-button-container {
     display: flex;
     align-items: center;
@@ -391,9 +411,11 @@ footer .rst-footer-buttons {
     letter-spacing: -0.02em;
     font-weight: 400;
 }
+
 .unified-header .nav-link.active {
     background: var(--white);
 }
+
 .unified-header .nav-link:hover {
     text-decoration: underline;
 }
@@ -405,6 +427,7 @@ footer .rst-footer-buttons {
     grid-template-columns: var(--sideWidth) 1fr;
     gap: 1rem;
 }
+
 /* First child: Side bar */
 .unified-wrapper .wy-grid-for-nav nav.wy-nav-side {
     position: relative;
@@ -443,6 +466,7 @@ footer .rst-footer-buttons {
     border-radius: 0;
     border-color: var(--color-d);
 }
+
 .wy-nav-side input[type=text]::placeholder {
     font-family: "Overpass", sans-serif;
     color: var(--color-e);
@@ -462,6 +486,7 @@ footer .rst-footer-buttons {
     max-width: 70ch;
     margin-inline: auto;
 }
+
 .unified-wrapper.menu-open .backdrop {
     opacity: 0.5;
 }
@@ -476,17 +501,22 @@ footer .rst-footer-buttons {
     opacity: 0;
     transition: opacity 200ms ease-in-out;
 }
+
 @media (max-width: 768px) {
+
     /* Menu closed styles */
     .unified-header .nav-link {
         display: none;
     }
+
     .unified-header .inner-header {
-    padding-inline: 1rem;
+        padding-inline: 1rem;
     }
+
     .unified-wrapper .wy-grid-for-nav {
         grid-template-columns: 1fr;
     }
+
     .unified-wrapper .wy-grid-for-nav nav.wy-nav-side {
         position: absolute;
         inset-block: 0;
@@ -496,20 +526,24 @@ footer .rst-footer-buttons {
         transform: translateX(-100%);
         transition: transform 200ms ease-in-out;
     }
+
     /* Menu open styles */
     .unified-wrapper .wy-grid-for-nav nav.wy-nav-side {
         position: absolute;
 
     }
+
     .unified-wrapper.menu-open nav.wy-nav-side {
         transform: translateX(0);
         transition: transform 200ms ease-in-out;
     }
+
     .unified-wrapper.menu-open .rst-versions {
         position: sticky;
         bottom: 0;
         width: 100%;
     }
+
     .unified-wrapper.menu-open .backdrop {
         display: block;
         position: fixed;
@@ -536,14 +570,17 @@ ul.search .context {
     border-inline-start: solid 3px #0002;
     padding: 2px 6px;
 }
+
 .rst-versions .rst-current-version {
     border-color: var(--color-d) !important;
 }
+
 .rst-current-version *,
 .rst-current-version .fa:before,
 .rst-current-version .fa-element {
     color: var(--color-b) !important;
 }
+
 .rst-current-version dt,
 .rst-current-version dd,
 .rst-current-version dd a,
@@ -552,32 +589,38 @@ ul.search .context {
 .rst-other-versions dl:last-of-type dd a {
     font-size: 14px !important;
 }
+
 .rst-other-versions {
     background: var(--white) !important;
     color: var(--color-a) !important;
 }
+
 .rst-other-versions a {
     text-decoration: underline;
     color: var(--color-c) !important;
 }
-.rst-other-versions dd:first-child a {
-    padding-inline-start: 0;
-}
+
 .rst-other-versions dt {
     color: var(--color-a) !important;
 }
+
 .rst-other-versions dl {
     margin-bottom: 2rem;
 }
+
 /* Bottom Search */
+.wy-nav-side input[type=text],
 .rst-other-versions dl:last-of-type dd {
     width: 100%;
 }
+
 .rst-other-versions dl:last-of-type dt {
     color: var(--color-b) !important;
 }
-.rst-other-versions dl:last-of-type dd div {
-    padding-inline-start: 0;
+
+.rst-other-versions dl:last-of-type div[style*=padding],
+.rst-other-versions dl dd:first-of-type a {
+    padding-inline-start: 0 !important;
 }
 
 button.toctree-expand {
@@ -638,7 +681,7 @@ button.mobile-menu-button {
 
     button.mobile-menu-button {
         display: flex;
-    }  
+    }
 }
 
 
@@ -650,15 +693,18 @@ button.mobile-menu-button {
 #search-results .search li {
     border-color: var(--color-d);
 }
+
 #search-results .search li:last-child {
     border: 0px;
 }
+
 .forum-link::after {
     content: '\279A';
     margin-inline-start: 0.25rem;
     font-size: 14px;
     font-family: 'Overpass Mono', monospace;
 }
+
 .wy-breadcrumbs-aside {
     display: block;
     padding-top: 0;
@@ -670,4 +716,3 @@ button.mobile-menu-button {
     font-family: "'Overpass'", sans-serif;
     font-weight: 700;
 }
-
