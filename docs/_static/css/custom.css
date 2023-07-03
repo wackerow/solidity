@@ -51,8 +51,11 @@ body,
 }
 
 body {
-    /* margin-top: var(--navHeight); */
     font-family: "Overpass", sans-serif;
+}
+
+a {
+    color: var(--color-c);
 }
 
 hr {
