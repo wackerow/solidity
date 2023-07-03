@@ -237,7 +237,15 @@ small * {
 }
 
 code.docutils.literal.notranslate {
-    color: var(--color-a);
+    padding: 2px 4px;
+    font-size: 0.875em;
+    font-family: "Overpass Mono", monospace;
+    background: var(--white);
+    color: var(--color-c);
+    border: 0px;
+}
+dt code.docutils.literal.notranslate {
+    background: none;
 }
 
 .wy-nav-content {
