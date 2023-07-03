@@ -11,7 +11,7 @@
 
     --white: #FAF8FF;
     --black: #110C4E;
-    --menu-bg: #2B247C08;
+    --menu-bg: #2B247C06;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
     --navHeight: 4.5rem;
@@ -31,7 +31,7 @@
 
     --white: #110C4E !important;
     --black: #FAF8FF !important;
-    --menu-bg: #E6E3EC08 !important;
+    --menu-bg: #E6E3EC06 !important;
 }
 
 html,
@@ -193,7 +193,7 @@ small * {
     font-size: 0.7em;
     padding: 0.1em 0.5em;
     background: transparent;
-    color: var(--color-a);
+    color: var(--color-a) !important;
     border: 1px solid var(--color-a);
     text-decoration: none;
 }
@@ -278,13 +278,16 @@ dt code.docutils.literal.notranslate {
     line-height: 125%;
 }
 
-.wy-menu-vertical li.current a {
+.wy-menu-vertical li.current a,
+.wy-menu-vertical li.current li a,
+.wy-menu-vertical li.current li a code {
     border: none;
+    color: var(--color-a);
 }
 
 ul.current ul,
-.wy-menu-vertical li.toctree-l2.current li.toctree-l3>a,
 .wy-menu-vertical li.current a:hover,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3>a,
 .wy-menu-vertical li.toctree-l3.current li.toctree-l4>a,
 .wy-menu-vertical li.toctree-l4.current li.toctree-l5>a,
 .wy-menu-vertical li.toctree-l5.current li.toctree-l6>a,

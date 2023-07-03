@@ -2,10 +2,6 @@
 
 /* DARK MODE STYLING */
 
-:root[style*=dark] .rst-content a:not(:visited) {
-  color: #aaddff;
-}
-
 /* code directives */
 
 :root[style*=dark] .method dt,
@@ -48,22 +44,10 @@
 /* inlined code highlights */
 
 :root[style*=dark] .xref,
-:root[style*=dark] .py-meth,
-:root[style*=dark] .rst-content a code {
+:root[style*=dark] .py-meth {
   color: #aaddff !important;
   font-weight: normal !important;
 }
-
-:root[style*=dark] .rst-content code {
-  color: #eee !important;
-  font-weight: normal !important;
-}
-
-:root[style*=dark] code.literal {
-  background-color: #2d2d2d !important;
-  border: 1px solid #6d6d6d !important;
-}
-
 
 /* highlight color search text */
 
@@ -88,7 +72,7 @@
 
 :root[style*=dark] .admonition,
 :root[style*=dark] .note {
-  background-color: #2d2d2d !important;
+  background-color: #0008 !important;
 }
 
 
@@ -113,7 +97,7 @@
 }
 
 :root[style*=dark] .highlight {
-  background: #222;
+  background: #0008;
   color: #f8f8f2
 }
 
@@ -589,15 +573,6 @@
 
 :root[style*=dark] .highlight .il {
   color: #ae81ff
-}
-
-
-/* Link to Remix IDE shown over code snippets */
-
-:root[style*=dark] .rst-content .remix-link-container a.remix-link,
-:root[style*=dark] .rst-content .remix-link-container a.remix-link:visited,
-:root[style*=dark] .rst-content .remix-link-container a.remix-link:not(:visited) {
-  color: black !important;
 }
 
 
