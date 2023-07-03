@@ -69,6 +69,8 @@ h1 {
     color: var(--color-a) !important;
     line-height: 1.1;
     text-wrap: balance;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
 }
 
 section:first-of-type h1:first-of-type {
@@ -85,6 +87,8 @@ h2 {
     color: var(--color-a) !important;
     line-height: 46px;
     text-wrap: balance;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
 }
 
 *:not([role=navigation])>p[role=heading]>span,
@@ -95,6 +99,8 @@ h3 {
     color: var(--color-a) !important;
     line-height: 46px;
     text-wrap: balance;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
 }
 
 h4 {
@@ -104,6 +110,8 @@ h4 {
     color: var(--color-a) !important;
     line-height: 46px;
     text-wrap: balance;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
 }
 
 h5 {
@@ -509,6 +517,18 @@ footer .rst-footer-buttons {
 }
 
 @media (max-width: 768px) {
+    h2 {
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+    }
+    h3 {
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+    }
+    h4 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
 
     /* Menu closed styles */
     .unified-header .nav-link {
@@ -613,6 +633,7 @@ ul.search .context {
 .rst-other-versions dl {
     margin-bottom: 1.5rem !important;
 }
+
 .rst-other-versions dl:last-of-type {
     margin-top: 2rem !important;
 }
