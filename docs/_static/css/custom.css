@@ -465,8 +465,12 @@ footer .rst-footer-buttons {
 }
 
 .wy-nav-side input[type=text] {
+    font-family: "Overpass", sans-serif;
     border-radius: 0;
     border-color: var(--color-d);
+    background: var(--white);
+    box-shadow: none;
+    color: var(--color-a);
 }
 
 .wy-nav-side input[type=text]::placeholder {
