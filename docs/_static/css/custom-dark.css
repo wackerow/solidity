@@ -21,10 +21,9 @@
 }
 
 :root[style*=dark] .rst-content dl:not(.docutils) dt {
-  color: #aaddff;
-  background-color: #2d2d2d;
-  border-top: solid 3px #525252;
-  border-left: solid 3px #525252;
+  background-color: #0008;
+  border-top: solid 3px #fff2;
+  border-left: solid 3px #fff2;
 }
 
 :root[style*=dark] em.property {

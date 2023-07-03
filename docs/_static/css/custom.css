@@ -275,6 +275,12 @@ ul.current ul,
     text-decoration: none !important;
 }
 
+.wy-breadcrumbs-aside a,
+.wy-breadcrumbs-aside a:visited,
+.wy-breadcrumbs-aside a:not(:visited),
+a.fa.fa-github,
+a.fa.fa-github:visited,
+a.fa.fa-github:not(:visited),
 a.btn.btn-neutral:visited,
 a.btn.btn-neutral:not(:visited),
 a.btn.btn-neutral {
@@ -284,6 +290,8 @@ a.btn.btn-neutral {
     text-decoration: none;
 }
 
+.wy-breadcrumbs-aside a:hover,
+a.fa.fa-github:hover,
 a.btn.btn-neutral:hover {
     background: var(--white) !important;
     color: var(--color-b) !important;
@@ -514,8 +522,55 @@ ul.search .context {
     background: var(--color-f);
 }
 
-.rst-versions .rst-other-versions {
+.rst-content dl:not(.docutils) dt {
+    color: var(--color-a);
+    background-color: #fff8;
+    border-top: solid 3px #0002;
+    border-inline-start: solid 3px #0002;
+    padding: 2px 6px;
+}
+.rst-versions .rst-current-version {
+    border-color: var(--color-d) !important;
+}
+.rst-current-version *,
+.rst-current-version .fa:before,
+.rst-current-version .fa-element {
+    color: var(--color-b) !important;
+}
+.rst-current-version dt,
+.rst-current-version dd,
+.rst-current-version dd a,
+.rst-other-versions dl:last-of-type dt,
+.rst-other-versions dl:last-of-type dd,
+.rst-other-versions dl:last-of-type dd a {
+    font-size: 14px !important;
+}
+.rst-other-versions {
+    background: var(--white) !important;
+    color: var(--color-a) !important;
+}
+.rst-other-versions a {
+    text-decoration: underline;
     color: var(--color-c) !important;
+}
+.rst-other-versions dd:first-child a {
+    padding-inline-start: 0;
+}
+.rst-other-versions dt {
+    color: var(--color-a) !important;
+}
+.rst-other-versions dl {
+    margin-bottom: 2rem;
+}
+/* Bottom Search */
+.rst-other-versions dl:last-of-type dd {
+    width: 100%;
+}
+.rst-other-versions dl:last-of-type dt {
+    color: var(--color-b) !important;
+}
+.rst-other-versions dl:last-of-type dd div {
+    padding-inline-start: 0;
 }
 
 button.toctree-expand {
@@ -597,3 +652,15 @@ button.mobile-menu-button {
     font-size: 14px;
     font-family: 'Overpass Mono', monospace;
 }
+.wy-breadcrumbs-aside {
+    display: block;
+    padding-top: 0;
+}
+
+.wy-breadcrumbs-aside a {
+    padding: 0.5rem 0.75rem;
+    font-size: 12px;
+    font-family: "'Overpass'", sans-serif;
+    font-weight: 700;
+}
+
