@@ -147,9 +147,10 @@ pre {
 
 /* project version (displayed under project logo) */
 .wy-side-nav-search > div.version {
-    color: var(--color-a);
+    color: var(--color-b);
     margin-top: 0;
     margin-bottom: 0.5rem;
+    text-align: start;
 }
 
 /* Link to Remix IDE shown next to code snippets */
@@ -438,8 +439,14 @@ footer .rst-footer-buttons {
     width: 100% !important;
 }
 
-.wy-side-nav-search input[type=text] {
+.wy-nav-side input[type=text] {
     border-radius: 0;
+    border-color: var(--color-d);
+}
+.wy-nav-side input[type=text]::placeholder {
+    font-family: "Overpass", sans-serif;
+    color: var(--color-e);
+    font-size: 16px;
 }
 
 /* Second child: Content */
