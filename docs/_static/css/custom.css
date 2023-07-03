@@ -1,11 +1,13 @@
 /* ROOT DECLARATIONS */
 :root {
-    --color-a: #2B247C; /* Text */
+    /* Text */
+    --color-a: #2B247C;
     --color-b: #672AC8;
     --color-c: #5554D9;
     --color-d: #9F94E8;
     --color-e: #AEC0F1;
-    --color-f: #E6E3EC; /* Background */
+    --color-f: #E6E3EC;
+    /* Background */
 
     --white: #FAF8FF;
     --black: #110C4E;
@@ -253,7 +255,7 @@ code.docutils.literal.notranslate {
     color: var(--color-d) !important;
 }
 
-nav.wy-nav-side a {
+.wy-side-scroll a {
     color: var(--color-a);
     background: transparent;
     font-size: 1rem;
@@ -605,7 +607,10 @@ ul.search .context {
 }
 
 .rst-other-versions dl {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem !important;
+}
+.rst-other-versions dl:last-of-type {
+    margin-top: 2rem !important;
 }
 
 /* Bottom Search */
