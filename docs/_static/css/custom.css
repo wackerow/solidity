@@ -595,6 +595,12 @@ ul.search .context {
     background: var(--color-f);
 }
 
+.rst-versions.shift-up {
+    height: unset !important;
+    max-height: unset !important;
+    overflow-y: unset !important;
+}
+
 .rst-content dl:not(.docutils) dt {
     color: var(--color-a);
     background-color: #fff8;
