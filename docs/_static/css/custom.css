@@ -432,6 +432,7 @@ footer .rst-footer-buttons {
     color: var(--color-a);
     letter-spacing: -0.02em;
     font-weight: 400;
+    border-bottom: 1px solid transparent;
 }
 
 .unified-header .nav-link.active {
