@@ -22,6 +22,7 @@ function rearrangeDom() {
   wrapperDiv.appendChild(backdrop);
 
   const content = document.querySelector(".wy-nav-content");
+  content.id = "content";
   const oldWrap = document.querySelector("section.wy-nav-content-wrap");
   oldWrap.remove();
   document.querySelector(".wy-grid-for-nav").appendChild(content);
@@ -49,6 +50,12 @@ function buildHeader() {
   logo.src = getLogoSrc(isDarkMode);
   logo.alt = "Solidity logo";
   homeLink.appendChild(logo);
+
+  const skipToContent = document.createElement("a");
+  skipToContent.classList.add("skip-to-content");
+  skipToContent.href = "#content";
+  skipToContent.innerText = "{ skip to content }";
+  innerHeader.appendChild(skipToContent);
 
   const navBar = document.createElement("nav");
   navBar.classList.add("nav-bar");

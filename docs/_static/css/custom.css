@@ -591,6 +591,10 @@ footer .rst-footer-buttons {
         z-index: 5;
         background: #0006;
     }
+    
+    a.skip-to-content {
+        display: none;
+    }
 }
 
 ul.search .context {
@@ -763,4 +767,27 @@ button.mobile-menu-button {
     font-size: 12px;
     font-family: "'Overpass'", sans-serif;
     font-weight: 700;
+}
+
+a.skip-to-content:visited,
+a.skip-to-content:not(:visited),
+a.skip-to-content {
+    display: block;
+    pointer-events: none;
+    width: fit-content;
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+    padding: 2px 4px;
+    font-size: 14px;
+    margin-inline-end: auto;
+    margin-inline-start: 2rem;
+    color: var(--color-a);
+}
+a.skip-to-content:focus {
+    opacity: 1;
+    transition: opacity 200ms ease-in-out;
+}
+#content {
+    scroll-margin-top: 6rem;
+    scroll-behavior: smooth;
 }
