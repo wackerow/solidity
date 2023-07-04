@@ -205,7 +205,7 @@ function initialize() {
 
 document.addEventListener("DOMContentLoaded", initialize);
 
-document.addEventListener("click", (e) => {
+const handleClick = (e) => {
   if (e.target.closest(".backdrop")) {
     toggleMenu({ force: false });
   }
@@ -221,4 +221,18 @@ document.addEventListener("click", (e) => {
       target.setAttribute("href", url.toString());
     }
   }
-});
+};
+document.addEventListener("click", handleClick);
+
+const handleKeyDown = (e) => {
+  if (e.metaKey && e.key === "k") {
+    document.querySelector("#rtd-search-form input").focus();
+  } else if (e.key === "Escape") {
+    toggleMenu({ force: false });
+  }
+  if (e.metaKey && e.code === "Backslash") {
+    toggleColorMode();
+  }
+};
+document.addEventListener("keydown", handleKeyDown);
+
