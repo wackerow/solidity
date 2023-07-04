@@ -439,7 +439,7 @@ footer .rst-footer-buttons {
 }
 
 .unified-header .nav-link:hover {
-    text-decoration: underline;
+    border-bottom: 1px solid var(--color-a);
 }
 
 /* Rest: Grid, with two children: side bar, and content */
