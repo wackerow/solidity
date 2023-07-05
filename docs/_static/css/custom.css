@@ -21,6 +21,10 @@
     -webkit-font-smoothing: antialiased;
 }
 
+a, button {
+    border-radius: 0;
+}
+
 :root[style*=dark] {
     --color-a: #E6E3EC !important;
     --color-b: #AEC0F1 !important;
@@ -39,8 +43,12 @@ body,
 .unified-header::before,
 .wy-nav-side,
 .rst-versions,
+code,
+div,
+input[type=text],
+a,
 .wy-grid-for-nav {
-    transition: background 200ms ease-in-out;
+    transition: background 150ms ease-in-out;
 }
 
 html,
@@ -267,7 +275,7 @@ dt code.docutils.literal.notranslate {
     text-decoration: underline;
 }
 
-.rst-content a:hover {
+.rst-content a:where(:focus,:focus-visible,:hover) {
     color: var(--color-d) !important;
 }
 
@@ -432,6 +440,7 @@ footer .rst-footer-buttons {
     color: var(--color-a);
     letter-spacing: -0.02em;
     font-weight: 400;
+    box-sizing: content-box;
     border-bottom: 1px solid transparent;
 }
 
@@ -498,6 +507,8 @@ footer .rst-footer-buttons {
     font-family: "Overpass", sans-serif;
     color: var(--color-e);
     font-size: 16px;
+    position: relative;
+    top: 4px;
 }
 
 /* Second child: Content */
@@ -505,7 +516,7 @@ footer .rst-footer-buttons {
     position: relative !important;
     overflow-y: scroll !important;
     width: 100%;
-    max-width: unset !important;
+    max-width: 100vw !important;
     padding-inline: 2rem;
 }
 
@@ -689,14 +700,13 @@ button.color-toggle {
     -webkit-box-pack: center;
     justify-content: center;
     user-select: none;
-    outline: transparent solid 2px;
-    outline-offset: -2px;
-    border-radius: 6px;
-    height: 40px;
-    width: 40px;
+    outline: none;
+    height: 28px;
+    width: 28px;
     background: none;
     border: none;
-    padding: 0.75rem;
+    padding: 6px;
+    margin: 6px;
     transition-duration: 200ms;
     transition-property: background-color,
         color,
@@ -705,8 +715,14 @@ button.color-toggle {
         opacity;
 }
 
+button.color-toggle:focus-visible {
+    outline: 2px solid var(--color-c);
+    color: var(--color-c);
+}
+
 button.color-toggle:hover {
-    background: #0001;
+    color: var(--color-c);
+    background: #0002;
 }
 
 button.color-toggle .color-toggle-icon {
