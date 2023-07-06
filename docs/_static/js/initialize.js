@@ -5,6 +5,15 @@ const getModeIconSrc = (isDark) => (isDark ? SUN_ICON_PATH : MOON_ICON_PATH);
 const getMenuIconSrc = (isDark) =>
   isDark ? DARK_HAMBURGER_PATH : LIGHT_HAMBURGER_PATH;
 
+function addFooterNote() {
+  const contentInfo = document.querySelector("div[role=contentinfo]");
+  const footerNote = document.createElement("p");
+  footerNote.classList.add("footer-note");
+  footerNote.innerHTML =
+    'Customized with ❤️ by the <a href="https://ethereum.org/" target="_blank">ethereum.org</a> team.';
+  contentInfo.parentNode.insertBefore(footerNote, contentInfo.nextSibling);
+}
+
 function rearrangeDom() {
   const bodyDivs = document.querySelectorAll("body>div");
   bodyDivs.forEach((div) => div.remove());
@@ -151,6 +160,7 @@ function initialize() {
     document.head.appendChild(link);
   });
 
+  // Rearrange DOM elements for styling
   rearrangeDom();
 
   // Check localStorage for existing color scheme preference
@@ -192,6 +202,9 @@ function initialize() {
   document.querySelector("input[name=mode]").remove();
   document.querySelector("label[for=switch]").remove();
   document.querySelector(".wy-side-nav-search > a").remove();
+
+  // Add footer note
+  addFooterNote();
 
   // Build header
   buildHeader();

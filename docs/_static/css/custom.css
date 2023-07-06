@@ -353,6 +353,10 @@ footer .rst-footer-buttons {
     gap: 2rem;
 }
 
+footer hr {
+  outline: 5px solid red;   
+}
+
 /**
  * Customization for the unified layout
  */
