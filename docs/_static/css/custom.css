@@ -449,7 +449,8 @@ footer .rst-footer-buttons {
 }
 
 .unified-header .nav-link:hover {
-    border-bottom: 1px solid var(--color-a);
+    color: var(--color-c);
+    border-bottom: 1px solid var(--color-c);
 }
 
 /* Rest: Grid, with two children: side bar, and content */
