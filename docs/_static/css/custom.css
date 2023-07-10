@@ -773,8 +773,7 @@ button.mobile-menu-button {
 }
 
 .forum-link::after {
-    content: '\279A';
-    margin-inline-start: 0.25rem;
+    content: ' \279A';
     font-size: 14px;
     font-family: 'Overpass Mono', monospace;
 }
