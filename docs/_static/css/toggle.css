@@ -12,6 +12,7 @@ input[type=checkbox] {
     background-color: var(--color-f);
     border-top: 1px solid var(--color-c);
 }
+
 .fa-caret-down,
 .fa-book {
     color: var(--color-a) !important;
